@@ -1,54 +1,53 @@
 import gsap from "gsap";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAnimation } from "../context/animation.context";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data";
 
 const Home: React.FC = () => {
   const { timeline } = useAnimation();
-  const headingRef = React.useRef<HTMLHeadingElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const [displayProjects, setDisplayProjects] = useState<Project[]>([]);
 
-  useEffect(() => {
-    // Add heading animation
+  // Animation effect for heading on component mount
+  const animateHeading = () => {
     timeline.add(
       gsap.fromTo(
         headingRef.current,
         { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.5, delay: 0.1 }
+        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
       ),
       2
     );
-  }, [timeline]);
+  };
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-
-    const handleViewportChange = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        // If viewport is smaller than md, remove two objects from the array
-        setDisplayProjects(projects.slice(0, projects.length - 2));
-      } else {
-        // If viewport is larger or equal to md, show all objects
-        setDisplayProjects(projects);
-      }
-    };
-
-    // Initial check
-    if (mediaQuery.matches) {
-      setDisplayProjects(projects.slice(0, projects.length - 2));
+  // Function to handle media query changes and update displayProjects state
+  const handleViewportChange = (e: MediaQueryListEvent) => {
+    if (e.matches) {
+      setDisplayProjects(sliceProjects(2));
     } else {
       setDisplayProjects(projects);
     }
+  };
 
-    mediaQuery.addListener(handleViewportChange); // Listen for changes
+  useEffect(() => {
+    const mediaQuery: any = window.matchMedia("(max-width: 768px)");
 
-    return () => mediaQuery.removeListener(handleViewportChange); // Cleanup listener on unmount
-  }, []);
+    animateHeading();
+    handleViewportChange(mediaQuery);
+
+    mediaQuery.addListener(handleViewportChange);
+    return () => mediaQuery.removeListener(handleViewportChange);
+  }, [timeline]);
+
+  // Function to slice projects array based on count
+  const sliceProjects = (count: number) => {
+    return projects.slice(0, projects.length - count);
+  };
 
   return (
     <div className="w-full">
-      {/* hero section  */}
+      {/* Hero section */}
       <section className="md:w-2/3 w-full md:mt-32 mt-20">
         <h2
           ref={headingRef}
@@ -61,7 +60,7 @@ const Home: React.FC = () => {
         </h2>
       </section>
 
-      {/* featuers section  */}
+      {/* Features section */}
       <section className="w-full md:mt-40 mt-24 mx-auto">
         <HoverEffect items={displayProjects} />
       </section>

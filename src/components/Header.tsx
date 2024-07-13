@@ -14,7 +14,7 @@ const Header = () => {
       gsap.fromTo(
         headingRef.current,
         { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.5, delay: 0.3 }
+        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
       ),
       0
     );
@@ -24,7 +24,7 @@ const Header = () => {
       gsap.fromTo(
         buttonRef.current,
         { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.5 }
+        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
       ),
       1
     );
@@ -37,7 +37,7 @@ const Header = () => {
       </h1>
       <button
         ref={buttonRef}
-        className=" text-white font-medium text-lg md:mr-8 mr-2"
+        className=" text-white font-medium text-lg md:mr-8 mr-2 hover:underline  "
       >
         Login
       </button>

@@ -1,7 +1,9 @@
 import { cn } from "../../lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useAnimation } from "../../context/animation.context";
+import gsap from "gsap";
 
 export const HoverEffect = ({
   items,
@@ -16,12 +18,26 @@ export const HoverEffect = ({
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  const { timeline } = useAnimation();
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    timeline.add(
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 3 },
+        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
+      ),
+      3
+    );
+  }, []);
   return (
     <div
       className={cn(
         "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10 ",
         className
       )}
+      ref={sectionRef}
     >
       {items.map((item, idx) => (
         <Link
