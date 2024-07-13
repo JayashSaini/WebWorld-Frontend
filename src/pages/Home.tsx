@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useAnimation } from "../context/animation.context";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data";
+import About from "./About";
 
 const Home: React.FC = () => {
   const { timeline } = useAnimation();
@@ -64,6 +65,9 @@ const Home: React.FC = () => {
       <section className="w-full md:mt-40 mt-24 mx-auto">
         <HoverEffect items={displayProjects} />
       </section>
+
+      {/* About section */}
+      <About />
     </div>
   );
 };

@@ -30,9 +30,9 @@ export const projects: Project[] = [
     link: "/projects",
   },
   {
-    title: "About Us",
+    title: "Coding Resources",
     description:
-      "Discover our mission to provide high-quality web development education and support to learners worldwide.",
-    link: "/about",
+      "Access curated resources including articles, videos, and tools to aid your learning and improving your speed.",
+    link: "/resources",
   },
 ];

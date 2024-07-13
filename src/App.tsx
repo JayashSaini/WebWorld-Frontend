@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import { Home } from "./pages";
+import { About, Home } from "./pages";
 
 function App() {
   return (
@@ -10,6 +10,8 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* Private routes */}
         <Route index={true} path="/" element={<Home />} />
+
+        <Route index={true} path="/about" element={<About />} />
 
         {/* 404 page */}
         <Route
