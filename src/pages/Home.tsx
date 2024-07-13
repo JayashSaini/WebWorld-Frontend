@@ -1,12 +1,14 @@
 import gsap from "gsap";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAnimation } from "../context/animation.context";
+import { HoverEffect } from "../components/ui/cardhover";
+import { Project, projects } from "../lib/data";
 
-const Home = () => {
+const Home: React.FC = () => {
   const { timeline } = useAnimation();
   const headingRef = React.useRef<HTMLHeadingElement>(null);
+  const [displayProjects, setDisplayProjects] = useState<Project[]>([]);
 
-  // Use effect to add animations to the timeline
   useEffect(() => {
     // Add heading animation
     timeline.add(
@@ -19,19 +21,50 @@ const Home = () => {
     );
   }, [timeline]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+    const handleViewportChange = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        // If viewport is smaller than md, remove two objects from the array
+        setDisplayProjects(projects.slice(0, projects.length - 2));
+      } else {
+        // If viewport is larger or equal to md, show all objects
+        setDisplayProjects(projects);
+      }
+    };
+
+    // Initial check
+    if (mediaQuery.matches) {
+      setDisplayProjects(projects.slice(0, projects.length - 2));
+    } else {
+      setDisplayProjects(projects);
+    }
+
+    mediaQuery.addListener(handleViewportChange); // Listen for changes
+
+    return () => mediaQuery.removeListener(handleViewportChange); // Cleanup listener on unmount
+  }, []);
+
   return (
-    <div className="w-full ">
-      <div className="md:w-2/3 w-full md:mt-32 mt-20">
+    <div className="w-full">
+      {/* hero section  */}
+      <section className="md:w-2/3 w-full md:mt-32 mt-20">
         <h2
           ref={headingRef}
-          className="lg:text-8xl md:text-6xl sm:text-5xl text-4xl"
+          className="lg:text-8xl md:text-6xl text-5xl custom-font"
         >
           An Online <span>Learning</span> Platform, For Web Developers{" "}
-          <span className="lg:text-7xl md:text-5xl sm:text-4xl text-3xl">
+          <span className="lg:text-7xl md:text-5xl sm:text-4xl text-3xl md:inline-block hidden">
             📙
           </span>
         </h2>
-      </div>
+      </section>
+
+      {/* featuers section  */}
+      <section className="w-full md:mt-40 mt-24 mx-auto">
+        <HoverEffect items={displayProjects} />
+      </section>
     </div>
   );
 };

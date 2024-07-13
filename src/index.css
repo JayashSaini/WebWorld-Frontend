@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Shanti&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,8 +10,13 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  background-color: #e8eaa1;
+  color: #000;
+}
+
 body {
-  font-family: "Shanti", sans-serif;
+  font-family: "Archivo", sans-serif;
 }
 
 h1,

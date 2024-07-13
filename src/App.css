@@ -1,4 +1,11 @@
-/* colors classes */
+@font-face {
+  font-family: "myFonts";
+  src: url("./assets/Kabrio-Abarth-Regular-trial.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* custom colors  */
 .custom-bg {
   background-color: #e8eaa1;
 }
@@ -18,8 +25,14 @@
     hsl(0deg 0% 0%) 30%
   );
 }
+
 /* custom height  */
 .custom-height {
   height: 100%;
   min-height: 90vh;
+}
+
+/* custom fonts */
+.custom-font {
+  font-family: "myFonts";
 }

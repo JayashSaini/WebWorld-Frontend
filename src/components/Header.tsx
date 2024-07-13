@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <nav className="w-full flex items-center justify-between md:px-5 px-3 md:py-5 py-4 border-b-[#e8eaa1] border-b-[1px]">
-      <h1 ref={headingRef} className="text-3xl font-light">
+      <h1 ref={headingRef} className="text-3xl font-light custom-font">
         web world
       </h1>
       <button
