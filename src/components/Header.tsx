@@ -1,13 +1,15 @@
 import gsap from "gsap";
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useAnimation } from "../context/animation.context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 const Header = () => {
   const { timeline } = useAnimation();
-  const headingRef = React.useRef(null);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
+  const headingRef = useRef(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const navigate = useNavigate();
 
   // Use effect to add animations to the timeline
   useEffect(() => {
@@ -37,8 +39,14 @@ const Header = () => {
       <Link to="/" ref={headingRef}>
         <img src={logo} alt="" className="w-[180px]" />
       </Link>
-      <button ref={buttonRef} className=" button ">
-        Login
+      <button
+        ref={buttonRef}
+        className=" button "
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        Sign in
       </button>
     </nav>
   );

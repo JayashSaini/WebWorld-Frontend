@@ -1,18 +1,38 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import { About, Home } from "./pages";
+import { About, Dashboard, Home, Login } from "./pages";
+import { PrivateRoute, PublicRoute } from "./components";
 
 function App() {
   return (
     <Routes>
       {/* Wrap all routes with Layout */}
       <Route path="/" element={<Layout />}>
-        {/* Private routes */}
+        {/* Public routes */}
         <Route index={true} path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
 
-        <Route index={true} path="/about" element={<About />} />
+        {/* Auth routes */}
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
 
+        {/* Secure Routes  */}
+
+        <Route
+          path="/learn"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
         {/* 404 page */}
         <Route
           path="*"

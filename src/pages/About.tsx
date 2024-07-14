@@ -6,7 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger"; // Import ScrollTrigger
 
 gsap.registerPlugin(ScrollTrigger); // Register ScrollTrigger
 
-const About = () => {
+const About: React.FC = () => {
   const { timeline } = useAnimation();
   const aboutRef = useRef<HTMLDivElement>(null);
 
