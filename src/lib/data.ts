@@ -35,4 +35,10 @@ export const projects: Project[] = [
       "Access curated resources including articles, videos, and tools to aid your learning and improving your speed.",
     link: "/resources",
   },
+  {
+    title: "Code Challenges",
+    description:
+      "Test your skills with coding challenges designed to push your boundaries and improve your problem-solving abilities.",
+    link: "/challenges",
+  },
 ];

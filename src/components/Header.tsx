@@ -2,10 +2,11 @@ import gsap from "gsap";
 import React, { useEffect } from "react";
 import { useAnimation } from "../context/animation.context";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 const Header = () => {
   const { timeline } = useAnimation();
-  const headingRef = React.useRef<HTMLHeadingElement>(null);
+  const headingRef = React.useRef(null);
   const buttonRef = React.useRef<HTMLButtonElement>(null);
 
   // Use effect to add animations to the timeline
@@ -33,15 +34,10 @@ const Header = () => {
 
   return (
     <nav className="w-full flex items-center justify-between md:px-5 px-3 md:py-5 py-4 border-b-[#e8eaa1] border-b-[1px]">
-      <Link to="/">
-        <h1 ref={headingRef} className="text-3xl font-light custom-font">
-          web world
-        </h1>
+      <Link to="/" ref={headingRef}>
+        <img src={logo} alt="" className="w-[180px]" />
       </Link>
-      <button
-        ref={buttonRef}
-        className=" text-white font-medium text-lg md:mr-8 mr-2 hover:underline  "
-      >
+      <button ref={buttonRef} className=" button ">
         Login
       </button>
     </nav>

@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   // Function to handle media query changes and update displayProjects state
   const handleViewportChange = (e: MediaQueryListEvent) => {
     if (e.matches) {
-      setDisplayProjects(sliceProjects(2));
+      setDisplayProjects(sliceProjects(3));
     } else {
       setDisplayProjects(projects);
     }

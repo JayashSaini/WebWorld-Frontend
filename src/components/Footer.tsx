@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import logo from "../assets/logo.svg";
 const Footer = () => {
   return (
     <footer className="mt-24">
@@ -7,9 +7,7 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
-              <span className="self-center text-3xl font-semibold  whitespace-nowrap ">
-                web world
-              </span>
+              <img src={logo} alt="" className="w-[180px]" />
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
