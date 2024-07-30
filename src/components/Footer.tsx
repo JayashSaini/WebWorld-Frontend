@@ -1,14 +1,27 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/weblogo.svg";
 const Footer = () => {
   return (
-    <footer className="w-full mt-24">
+    <footer className="w-full md:mt-36 mt-20">
       <div className="mx-auto w-full  md:px-8 px-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
-          <div className="mb-6 md:mb-0">
-            <Link to="/" className="flex items-center">
-            <img src={logo} alt="web world" className="md:w-[170px] w-[150px]"/>
-            </Link>
+          <div className="mb-16 md:mb-0">
+            <div>
+              <p className="text-lg">Subscribe for Daily Updates!</p>
+              <div className="subscribe-group">
+                <input
+                  type="email"
+                  className="subscribe"
+                  id="Email"
+                  name="Email"
+                  placeholder="Enter your mail"
+                  autoComplete="off"
+                />
+                <input
+                  className="subscribe-button--submit"
+                  value="Subscribe"
+                  type="submit"
+                />
+              </div>
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
@@ -17,14 +30,14 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <Link to="/about" className="hover:underline">
+                  <a href="/about" className="hover:underline">
                     About Us
-                  </Link>
+                  </a>{" "}
                 </li>
                 <li className="mb-4">
-                  <Link to="/contact" className="hover:underline">
+                  <a href="/contact" className="hover:underline">
                     Contact us
-                  </Link>
+                  </a>{" "}
                 </li>
                 <li className="mb-4">+91 9079830785</li>
               </ul>

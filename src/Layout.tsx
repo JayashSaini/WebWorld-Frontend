@@ -19,7 +19,7 @@ const Layout = () => {
     <div className="w-full min-h-screen h-full custom-main-bg text-white">
       {showHeaderFooter && <Header />}
       <div className="max-w-screen-xl w-full m-auto">
-        <div className="md:px-8 px-4">
+        <div className="md:px-8 px-2">
           <Outlet />
         </div>
       </div>

@@ -1,43 +1,9 @@
-import { useEffect, useRef } from "react";
 import aboutus from "../assets/aboutus.svg";
-import { useAnimation } from "../context/animation.context";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger"; // Import ScrollTrigger
-
-gsap.registerPlugin(ScrollTrigger); // Register ScrollTrigger
-
 const About: React.FC = () => {
-  const { timeline } = useAnimation();
-  const aboutRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (aboutRef.current) {
-      timeline.add(
-        gsap.fromTo(
-          aboutRef.current,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.5,
-            scrollTrigger: {
-              trigger: aboutRef.current,
-              start: "top 50%",
-              end: "bottom 50%",
-              scrub: true,
-            },
-          }
-        ),
-        2
-      );
-    }
-  }, []);
 
   return (
     <section
-      ref={aboutRef}
-      className="flex md:flex-row flex-col-reverse gap-14 my-28"
+      className="flex md:flex-row flex-col-reverse gap-14 md:my-28 my-16"
     >
       <div className="md:w-1/2 w-full flex items-end justify-center">
         <img src={aboutus} alt="" className="md:w-[70%] w-full" />

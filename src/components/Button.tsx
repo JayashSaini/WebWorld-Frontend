@@ -11,7 +11,11 @@ const Button: React.FC<
     <>
       <button
         {...props}
-        className={`w-full py-3 rounded-md text-base hover:scale-y-105 flex items-center justify-center border-[#e8eaa1] border-[1px]   duration-200 ease-in font-semibold`}
+        className={`w-full ${
+          severity == "primary" ? "py-3" : "py-[6px]"
+        } rounded-md text-base flex items-center justify-center border-[#ef6c35] ${
+          severity == "primary" ? "bg-[#ef6c35]" : "bg-transparent"
+        } border-[1px]   duration-200 ease-in font-semibold`}
       >
         {props.children}
       </button>

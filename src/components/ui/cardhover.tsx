@@ -1,9 +1,7 @@
 import { cn } from "../../lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { useAnimation } from "../../context/animation.context";
-import gsap from "gsap";
+import { useState } from "react";
 
 export const HoverEffect = ({
   items,
@@ -18,26 +16,12 @@ export const HoverEffect = ({
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const { timeline } = useAnimation();
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    timeline.add(
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
-      ),
-      3
-    );
-  }, []);
   return (
     <div
       className={cn(
         "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10 ",
         className
       )}
-      ref={sectionRef}
     >
       {items.map((item, idx) => (
         <Link
@@ -50,7 +34,7 @@ export const HoverEffect = ({
           <AnimatePresence>
             {hoveredIndex === idx && (
               <motion.span
-                className="absolute inset-0 h-full w-full bg-[#babd73b2]  block  rounded-3xl  "
+                className="absolute inset-0 h-full w-full bg-[#385170]  block  rounded-3xl  "
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}
                 animate={{
@@ -84,7 +68,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        "rounded-2xl h-full w-full p-4 overflow-hidden custom-main-bg border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
         className
       )}
     >

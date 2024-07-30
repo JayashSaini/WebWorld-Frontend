@@ -49,20 +49,17 @@ const Home: React.FC = () => {
   return (
     <div className="w-full">
       {/* Hero section */}
-      <section className="md:w-2/3 w-full md:mt-32 mt-20">
+      <section className="w-full md:mt-32 mt-20">
         <h2
           ref={headingRef}
           className="lg:text-8xl md:text-6xl text-5xl custom-font"
         >
           An Online <span>Learning</span> Platform, For Web Developers{" "}
-          <span className="lg:text-7xl md:text-5xl sm:text-4xl text-3xl md:inline-block hidden">
-            📙
-          </span>
         </h2>
       </section>
 
       {/* Features section */}
-      <section className="w-full md:mt-40 mt-24 mx-auto">
+      <section className="w-full md:mt-40 mt-6 mx-auto">
         <HoverEffect items={displayProjects} />
       </section>
 
