@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import { About, Dashboard, Home, Login } from "./pages";
+import { About, Dashboard, Home, Login, Register } from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
 
 function App() {
@@ -15,10 +15,19 @@ function App() {
 
         {/* Auth routes */}
         <Route
-          path="/login"
+          path="/auth/login"
           element={
             <PublicRoute>
               <Login />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/auth/register"
+          element={
+            <PublicRoute>
+              <Register />
             </PublicRoute>
           }
         />

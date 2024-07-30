@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import logo from "../assets/weblogo.svg";
 const Footer = () => {
   return (
-    <footer className="mt-24">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <footer className="w-full mt-24">
+      <div className="mx-auto w-full  md:px-8 px-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
-              <img src={logo} alt="" className="w-[180px]" />
+            <img src={logo} alt="web world" className="md:w-[170px] w-[150px]"/>
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

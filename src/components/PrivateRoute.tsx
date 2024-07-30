@@ -11,7 +11,7 @@ const PrivateRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { token, user } = useAuth();
 
   // If there's no token or user ID, redirect to the login page
-  if (!token || !user) return <Navigate to="/login" replace />;
+  if (!token || !user) return <Navigate to="/auth/login" replace />;
 
   // If authenticated, render the child components
   return children;

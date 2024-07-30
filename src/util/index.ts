@@ -1,5 +1,5 @@
 // Importing necessary modules and interfaces
-import { AxiosResponse } from "axios";
+import {  AxiosResponse } from "axios";
 import { ApiResponse } from "../interfaces/api";
 
 // A utility function for handling API requests with loading, success, and error handling
@@ -21,21 +21,17 @@ export const requestHandler = async (
       // Call the onSuccess callback with the response data
       onSuccess(data);
     }
-  } catch (error: any) {
+  } catch (error:any) {
     if (error.response?.status === 422) {
       const errorObject = error.response.data.errors[0];
       const [_, value] = Object.entries(errorObject)[0];
       onError(value as string);
-      return;
+    } else if ([401, 403].includes(error?.response.data?.statusCode)) {
+      LocalStorage.clear();
+      if (isBrowser) window.location.href = "/auth/login"; // Redirect to login page
+    } else {
+      onError(error.response?.data?.message || "Something went wrong");
     }
-
-    if ([401, 403].includes(error?.response.data?.statusCode)) {
-      LocalStorage.clear(); // Clear local storage on authentication issues
-      if (isBrowser) window.location.href = "/login"; // Redirect to login page
-      return;
-    }
-
-    onError(error.response?.data?.message || "Something went wrong");
   } finally {
     // Hide loading state if setLoading function is provided
     if (setLoading) setLoading(false);
@@ -64,7 +60,7 @@ export class LocalStorage {
   }
 
   // Set a value in local storage by key
-  static set(key: string, value: any) {
+  static set(key: string, value:string) {
     if (!isBrowser) return;
     localStorage.setItem(key, JSON.stringify(value));
   }

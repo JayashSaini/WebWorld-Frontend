@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser, logoutUser, registerUser } from "../api";
-import Loader from "../components/Loader.tsx";
+import { Loader } from "../components";
 import { UserInterface } from "../interfaces/user.ts";
 import { LocalStorage, requestHandler } from "../util";
 import { toast } from "sonner";
@@ -43,13 +43,13 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     await requestHandler(
       async () => await loginUser(data),
       setIsLoading,
-      (res: any) => {
+      (res) => {
         const { data } = res;
         setUser(data);
         setToken(data.accessToken);
         LocalStorage.set("user", data.user);
         LocalStorage.set("token", data.accessToken);
-        navigate("/");
+        navigate("/learn");
       },
       (message: string) => {
         toast.error(message);
@@ -68,7 +68,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading,
       () => {
         toast.success("Account created successfully! Go ahead and login.");
-        navigate("/login"); // Redirect to the login page after successful registration
+        navigate("/auth/login"); // Redirect to the login page after successful registration
       },
       (message: string) => {
         toast.error(message);
@@ -85,7 +85,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setUser(null);
         setToken(null);
         LocalStorage.clear(); // Clear local storage on logout
-        navigate("/login"); // Redirect to the login page after successful logout
+        navigate("/auth/login"); // Redirect to the login page after successful logout
       },
       (message: string) => {
         toast.error(message);
@@ -96,8 +96,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
-    const _token:string | null = LocalStorage.get("token");
-    const _user:UserInterface | null = LocalStorage.get("user");
+    const _user: UserInterface | null = LocalStorage.get(
+      "user"
+    ) as UserInterface | null;
+    const _token: string | null = LocalStorage.get("token") as string | null;
     if (_token && _user?._id) {
       setUser(_user);
       setToken(_token);

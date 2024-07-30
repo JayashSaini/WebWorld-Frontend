@@ -11,7 +11,7 @@
 }
 
 *::selection {
-  background-color: #e8eaa1;
+  background-color: #ef6c35;
   color: #000;
 }
 
@@ -22,7 +22,7 @@ body {
 h1,
 h3,
 span {
-  color: #e8eaa1;
+  color: #ef6c35;
 }
 
 h2,
