@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import webworldpng from "../assets/webworld.png";
+import aboutus from "../assets/aboutus.svg";
 import { useAnimation } from "../context/animation.context";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger"; // Import ScrollTrigger
@@ -29,7 +29,7 @@ const About: React.FC = () => {
             },
           }
         ),
-        4
+        2
       );
     }
   }, []);
@@ -37,10 +37,10 @@ const About: React.FC = () => {
   return (
     <section
       ref={aboutRef}
-      className="flex md:flex-row flex-col-reverse gap-5 my-28"
+      className="flex md:flex-row flex-col-reverse gap-14 my-28"
     >
-      <div className="md:w-1/2 w-full flex items-center justify-center">
-        <img src={webworldpng} alt="" className="md:w-3/5 w-full" />
+      <div className="md:w-1/2 w-full flex items-end justify-center">
+        <img src={aboutus} alt="" className="md:w-[70%] w-full" />
       </div>
       <div className="md:w-1/2 w-full">
         <h1 className="text-5xl custom-font font-semibold">About Us</h1>

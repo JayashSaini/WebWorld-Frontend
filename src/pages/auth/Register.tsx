@@ -1,20 +1,21 @@
 // Importing necessary components and hooks
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Button } from "../components";
-import { useAuth } from "../context/auth.context";
-import { userLoginSchema } from "../util/schema";
+import { Input, Button } from "../../components/index.ts";
+import { useAuth } from "../../context/auth.context.tsx";
+import { userRegisterSchema } from "../../util/schema.ts";
 
 // Defining form input interface
 interface IFormInput {
+  username: string;
   email: string;
   password: string;
 }
 
-// Component for the Login page
-const Login: React.FC = () => {
+// Component for the Register page
+const Register: React.FC = () => {
   // Accessing the login function from the AuthContext
-  const { login } = useAuth();
+  const { register: authRegister } = useAuth();
 
   // Setting up React Hook Form
   const {
@@ -22,27 +23,37 @@ const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>({
-    resolver: yupResolver(userLoginSchema),
+    resolver: yupResolver(userRegisterSchema),
   });
 
   // Function to handle the login process
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    await login(data);
+    await authRegister(data);
   };
 
   return (
-    <div className="w-full py-44">
+    <div className="w-full h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="m-auto sm:w-1/2 w-full sm:p-8 p-4 flex justify-center items-center gap-5 flex-col shadow-md rounded-2xl my-16 border-[#e8eaa1] border-[1px]"
+        className="m-auto sm:w-1/2 w-full sm:p-8 p-4 flex justify-center items-center gap-5 flex-col shadow-md rounded-2xl my-16 border-[#ef6c35] border-[1px]"
       >
         <h1 className="md:text-3xl text-2xl text-center my-4 text-white custom-font">
-          Sign In to your Account
+          Sign Up
         </h1>
         {/* Input for entering the email */}
         <div className="w-full">
           <Input
-            placeholder="Enter the email..."
+            placeholder="username"
+            {...register("username")}
+            required={true}
+          />
+          {errors.username && (
+            <p className="text-red-500">{errors.username.message}</p>
+          )}
+        </div>
+        <div className="w-full">
+          <Input
+            placeholder="email"
             type="email"
             {...register("email")}
             required={true}
@@ -54,7 +65,7 @@ const Login: React.FC = () => {
         {/* Input for entering the password */}
         <div className="w-full">
           <Input
-            placeholder="Enter the password..."
+            placeholder="password"
             type="password"
             {...register("password")}
             required={true}
@@ -67,9 +78,9 @@ const Login: React.FC = () => {
         <Button fullWidth>Sign in</Button>
         {/* Link to the registration page */}
         <small className="text-zinc-300 md:text-base text-sm">
-          Don&apos;t have an account?{" "}
-          <a className="text-blue-400 hover:underline" href="/register">
-            Register
+          Already have an account?{" "}
+          <a className="text-blue-400 hover:underline" href="/auth/login">
+            Login
           </a>
         </small>
       </form>
@@ -77,4 +88,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Register;

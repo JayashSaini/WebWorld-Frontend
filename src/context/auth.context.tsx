@@ -96,8 +96,8 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
-    const _token = LocalStorage.get("token");
-    const _user = LocalStorage.get("user");
+    const _token:string | null = LocalStorage.get("token");
+    const _user:UserInterface | null = LocalStorage.get("user");
     if (_token && _user?._id) {
       setUser(_user);
       setToken(_token);
