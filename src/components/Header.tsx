@@ -1,52 +1,40 @@
-import gsap from "gsap";
-import { useEffect, useRef } from "react";
-import { useAnimation } from "../context/animation.context";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import { useAuth } from "../context/auth.context";
+import logo from '../assets/weblogo.svg'
 
 const Header = () => {
-  const { timeline } = useAnimation();
   const headingRef = useRef(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const { user, token } = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(!!user && !!token); // Set initial state based on user and token
 
   const navigate = useNavigate();
 
-  // Use effect to add animations to the timeline
   useEffect(() => {
-    // Add heading animation
-    timeline.add(
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
-      ),
-      0
-    );
-
-    // Add button animation
-    timeline.add(
-      gsap.fromTo(
-        buttonRef.current,
-        { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
-      ),
-      1
-    );
-  }, [timeline]);
+    // Update the isLoggedIn state whenever user or token changes
+    setIsLoggedIn(!!user && !!token);
+  }, [user, token]);
 
   return (
-    <nav className="w-full flex items-center justify-between md:px-5 px-3 md:py-5 py-4 border-b-[#e8eaa1] border-b-[1px]">
+    <nav className="w-full flex items-center justify-between md:px-5 px-3 md:py-5 py-4 ">
       <Link to="/" ref={headingRef}>
-        <img src={logo} alt="" className="w-[180px]" />
+        <h1 className="custom-font md:text-3xl text-2xl font-semibold">
+          <img src={logo} alt="web world" className="md:w-[170px] w-[150px]"/>
+        </h1>
       </Link>
       <button
         ref={buttonRef}
-        className=" button "
+        className="button"
         onClick={() => {
-          navigate("/login");
+          if (!isLoggedIn) {
+            navigate("/auth/login");
+          } else {
+            navigate("/learn");
+          }
         }}
       >
-        Sign in
+        {isLoggedIn ? "Dashboard" : "Sign In"}
       </button>
     </nav>
   );
