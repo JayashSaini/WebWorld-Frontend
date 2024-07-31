@@ -2,8 +2,9 @@ import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import { useAnimation } from "../context/animation.context";
 import { HoverEffect } from "../components/ui/cardhover";
-import { Project, projects } from "../lib/data";
+import { Project, projects } from "../lib/data.tsx";
 import About from "./About";
+import { CardCarousal } from "../components/CardCarousel.tsx";
 
 const Home: React.FC = () => {
   const { timeline } = useAnimation();
@@ -61,6 +62,11 @@ const Home: React.FC = () => {
       {/* Features section */}
       <section className="w-full md:mt-40 mt-6 mx-auto">
         <HoverEffect items={displayProjects} />
+      </section>
+
+      {/* courses section */}
+      <section className="w-full my-10">
+        <CardCarousal />
       </section>
 
       {/* About section */}

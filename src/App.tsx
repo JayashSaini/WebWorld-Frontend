@@ -42,6 +42,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         {/* 404 page */}
         <Route
           path="*"

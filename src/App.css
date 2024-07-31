@@ -111,6 +111,7 @@
 .subscribe {
   min-height: 50px;
   max-width: 250px;
+  width: 100%;
   padding: 0 1rem;
   color: #fff;
   font-size: 15px;
