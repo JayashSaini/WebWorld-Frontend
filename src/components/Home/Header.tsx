@@ -2,8 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth.context";
 import logo from "../../assets/weblogo.svg";
+import { useAnimation } from "../../context/animation.context";
+import gsap from "gsap";
 
 const Header = () => {
+  const { timeline } = useAnimation();
   const headingRef = useRef(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { user, token } = useAuth();
@@ -12,6 +15,24 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    timeline.add(
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: 3 },
+        { opacity: 1, y: 0, duration: 0.3, delay: 0.3 }
+      ),
+      0
+    );
+    // Add button animation
+    timeline.add(
+      gsap.fromTo(
+        buttonRef.current,
+        { opacity: 0, y: 3 },
+        { opacity: 1, y: 0, duration: 0.3 }
+      ),
+      1
+    );
+
     // Update the isLoggedIn state whenever user or token changes
     setIsLoggedIn(!!user && !!token);
   }, [user, token]);

@@ -13,7 +13,9 @@ const AnimationContext = createContext<AnimationContextType | undefined>(
 export const AnimationProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const timeline = useRef(gsap.timeline({ paused: true }));
+  const timeline = useRef(
+    gsap.timeline({ paused: true, ease: "power2.inOut" })
+  );
 
   useEffect(() => {
     // Start the timeline when the component mounts

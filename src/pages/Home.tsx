@@ -9,18 +9,16 @@ import { HomeFooter, HomeHeader, CardCarousal } from "../components/index.ts";
 const Home: React.FC = () => {
   const { timeline } = useAnimation();
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const featureRef = useRef<HTMLDivElement>(null);
+  const courseRef = useRef<HTMLDivElement>(null);
+
   const [displayProjects, setDisplayProjects] = useState<Project[]>([]);
 
   // Animation effect for heading on component mount
-  const animateHeading = () => {
-    timeline.add(
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.3, delay: 0.1 }
-      ),
-      0
-    );
+  const gsapAnimation = () => {
+    timeline.add(gsap.to(headingRef.current, { opacity: 1, duration: 0.3 }), 2);
+    timeline.add(gsap.to(featureRef.current, { opacity: 1, duration: 0.3 }), 3);
+    timeline.add(gsap.to(courseRef.current, { opacity: 1, duration: 0.3 }), 4);
   };
 
   // Function to handle media query changes and update displayProjects state
@@ -35,7 +33,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const mediaQuery: any = window.matchMedia("(max-width: 768px)");
 
-    animateHeading();
+    gsapAnimation();
     handleViewportChange(mediaQuery);
 
     mediaQuery.addListener(handleViewportChange);
@@ -56,19 +54,22 @@ const Home: React.FC = () => {
       <section className="w-full md:mt-32 mt-20">
         <h2
           ref={headingRef}
-          className="lg:text-8xl md:text-6xl text-5xl custom-font"
+          className="lg:text-8xl md:text-6xl text-5xl custom-font opacity-0"
         >
           An Online <span>Learning</span> Platform, For Web Developers{" "}
         </h2>
       </section>
 
       {/* Features section */}
-      <section className="w-full md:mt-40 mt-6 mx-auto">
+      <section
+        ref={featureRef}
+        className="w-full md:mt-40 mt-6 mx-auto opacity-0"
+      >
         <HoverEffect items={displayProjects} />
       </section>
 
       {/* courses section */}
-      <section className="w-full ">
+      <section ref={courseRef} className="w-full opacity-0">
         <CardCarousal />
       </section>
 

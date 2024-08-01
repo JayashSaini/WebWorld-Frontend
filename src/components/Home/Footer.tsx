@@ -1,7 +1,26 @@
+import { useEffect, useRef } from "react";
+import { useAnimation } from "../../context/animation.context";
+import gsap from "gsap";
+
 const Footer = () => {
+  const { timeline } = useAnimation();
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (footerRef.current) {
+      timeline.add(
+        gsap.to(footerRef.current, {
+          opacity: 1,
+          duration: 0.3,
+        }),
+        6
+      );
+    }
+  }, [timeline]);
+
   return (
-    <footer className="w-full md:mt-36 mt-20">
-      <div className="mx-auto w-full  md:px-8 px-4 py-6 lg:py-8">
+    <footer ref={footerRef} className=" opacity-0 w-full md:mt-36 mt-20">
+      <div className="mx-auto w-full  py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-16 md:mb-0">
             <div>
