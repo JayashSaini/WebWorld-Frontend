@@ -4,7 +4,7 @@ import { useAnimation } from "../context/animation.context";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data.tsx";
 import About from "./About";
-import { CardCarousal } from "../components/CardCarousel.tsx";
+import { HomeFooter, HomeHeader, CardCarousal } from "../components/index.ts";
 
 const Home: React.FC = () => {
   const { timeline } = useAnimation();
@@ -49,6 +49,9 @@ const Home: React.FC = () => {
 
   return (
     <div className="w-full">
+      {/* Header section */}
+      <HomeHeader />
+
       {/* Hero section */}
       <section className="w-full md:mt-32 mt-20">
         <h2
@@ -65,12 +68,15 @@ const Home: React.FC = () => {
       </section>
 
       {/* courses section */}
-      <section className="w-full my-10">
+      <section className="w-full ">
         <CardCarousal />
       </section>
 
       {/* About section */}
       <About />
+
+      {/* Footer  */}
+      <HomeFooter />
     </div>
   );
 };

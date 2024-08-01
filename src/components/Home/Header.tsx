@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/auth.context";
-import logo from '../assets/weblogo.svg'
+import { useAuth } from "../../context/auth.context";
+import logo from "../../assets/weblogo.svg";
 
 const Header = () => {
   const headingRef = useRef(null);
@@ -17,10 +17,10 @@ const Header = () => {
   }, [user, token]);
 
   return (
-    <nav className="w-full flex items-center justify-between md:px-8 px-4 md:py-5 py-4 ">
+    <nav className="w-full flex items-center justify-between md:py-5 py-4 ">
       <Link to="/" ref={headingRef}>
         <h1 className="custom-font md:text-3xl text-2xl font-semibold">
-          <img src={logo} alt="web world" className="md:w-[170px] w-[150px]"/>
+          <img src={logo} alt="web world" className="md:w-[170px] w-[150px]" />
         </h1>
       </Link>
       <button
