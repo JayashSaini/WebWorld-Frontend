@@ -59,6 +59,13 @@ const resetPasswordRequest = (data: {
   });
 };
 
+const resendEmailVerificationRequest = (email: string) => {
+  return apiClient.post(`/users/resend-verify-email`, { email });
+};
+
+const verifyEmailRequest = (token: string) => {
+  return apiClient.get(`/users/verify-email/${token}`);
+};
 // Export all the API functions
 export {
   loginUser,
@@ -67,4 +74,6 @@ export {
   forgotPasswordRequest,
   verifyOTPRequest,
   resetPasswordRequest,
+  resendEmailVerificationRequest,
+  verifyEmailRequest,
 };

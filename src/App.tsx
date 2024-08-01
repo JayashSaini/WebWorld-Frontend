@@ -4,6 +4,8 @@ import Layout from "./Layout";
 import {
   About,
   Dashboard,
+  EmailVerification,
+  EmailVerificationResult,
   ForgotPassword,
   Home,
   Login,
@@ -64,6 +66,24 @@ function App() {
           element={
             <PublicRoute>
               <ResetPassword />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/auth/email-verification"
+          element={
+            <PublicRoute>
+              <EmailVerification />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/auth/email-verification/:token"
+          element={
+            <PublicRoute>
+              <EmailVerificationResult />
             </PublicRoute>
           }
         />

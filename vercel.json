@@ -6,7 +6,10 @@
     { "source": "/auth/forgot-password", "destination": "/index.html" },
     { "source": "/auth/reset-password/:token", "destination": "/index.html" },
     { "source": "/auth/email-verification", "destination": "/index.html" },
-    { "source": "/email-verification/:token", "destination": "/index.html" },
+    {
+      "source": "/auth/email-verification/:token",
+      "destination": "/index.html"
+    },
 
     {
       "source": "/api/(.*)",

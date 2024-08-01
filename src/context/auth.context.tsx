@@ -87,8 +87,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       async () => await registerUser(data),
       setIsLoading,
       () => {
-        toast.success("Account created successfully! Go ahead and login.");
-        navigate("/auth/login"); // Redirect to the login page after successful registration
+        toast.success("Verification link sent to your email!");
+        setEmail(data.email); // Set the email for resending verification link after successful registration
+        navigate("/auth/email-verification"); // Redirect to the login page after successful registration
       },
       (message: string) => {
         toast.error(message);
