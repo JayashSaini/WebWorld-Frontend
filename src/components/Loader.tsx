@@ -2,11 +2,11 @@ import { TailSpin } from "react-loader-spinner";
 
 const Loader = () => {
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center custom-main-bg">
       <TailSpin
         visible={true}
-        height="100"
-        width="100"
+        height="50"
+        width="50"
         color="#fff"
         ariaLabel="tail-spin-loading"
         radius="1"

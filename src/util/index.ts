@@ -1,5 +1,5 @@
 // Importing necessary modules and interfaces
-import {  AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { ApiResponse } from "../interfaces/api";
 
 // A utility function for handling API requests with loading, success, and error handling
@@ -10,7 +10,10 @@ export const requestHandler = async (
   onError: (error: string) => void
 ) => {
   // Show loading state if setLoading function is provided
-  if (setLoading) setLoading(true);
+
+  if (setLoading) {
+    setLoading(true);
+  }
 
   try {
     // Make the API request
@@ -21,7 +24,7 @@ export const requestHandler = async (
       // Call the onSuccess callback with the response data
       onSuccess(data);
     }
-  } catch (error:any) {
+  } catch (error: any) {
     if (error.response?.status === 422) {
       const errorObject = error.response.data.errors[0];
       const [_, value] = Object.entries(errorObject)[0];
@@ -60,7 +63,7 @@ export class LocalStorage {
   }
 
   // Set a value in local storage by key
-  static set(key: string, value:string) {
+  static set(key: string, value: string) {
     if (!isBrowser) return;
     localStorage.setItem(key, JSON.stringify(value));
   }

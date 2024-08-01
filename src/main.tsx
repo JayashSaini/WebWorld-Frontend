@@ -13,6 +13,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <App />
       </AnimationProvider>
     </AuthProvider>
-    <Toaster position="top-center" duration={1500} />
+    <Toaster position="top-center" duration={2000} />
   </BrowserRouter>
 );

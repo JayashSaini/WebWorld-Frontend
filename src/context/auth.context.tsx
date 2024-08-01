@@ -1,6 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser, logoutUser, registerUser } from "../api";
+import {
+  forgotPasswordRequest,
+  loginUser,
+  logoutUser,
+  registerUser,
+  verifyOTPRequest,
+} from "../api";
 import { Loader } from "../components";
 import { UserInterface } from "../interfaces/user.ts";
 import { LocalStorage, requestHandler } from "../util";
@@ -9,6 +15,7 @@ import { toast } from "sonner";
 // Create a context to manage authentication-related data and functions
 const AuthContext = createContext<{
   user: UserInterface | null;
+  email: string | null;
   token: string | null;
   login: (data: { email: string; password: string }) => Promise<void>;
   register: (data: {
@@ -17,12 +24,17 @@ const AuthContext = createContext<{
     password: string;
   }) => Promise<void>;
   logout: () => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
+  verifyOTP: (data: { email: string; otp: string }) => Promise<void>;
 }>({
   user: null,
+  email: null,
   token: null,
   login: async () => {},
   register: async () => {},
   logout: async () => {},
+  forgotPassword: async () => {},
+  verifyOTP: async () => {},
 });
 
 // Create a hook to access the AuthContext
@@ -35,6 +47,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState<UserInterface | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -93,6 +106,38 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  // Function to handle Forgot Password
+  const forgotPassword = async (email: string) => {
+    await requestHandler(
+      async () => await forgotPasswordRequest(email),
+      setIsLoading,
+      () => {
+        toast.success("OTP sent to your email!");
+        setEmail(email);
+        navigate("/auth/verify-otp"); // Redirect to the OTP verification page after sending OTP
+      },
+      (message: string) => {
+        toast.error(message);
+      }
+    );
+  };
+
+  const verifyOTP = async (data: { email: string; otp: string }) => {
+    await requestHandler(
+      async () => await verifyOTPRequest(data),
+      setIsLoading,
+      (res) => {
+        const { data } = res;
+        setEmail(null);
+        toast.success("OTP verified successfully!");
+        navigate(`/auth/reset-password/${data.token}`);
+      },
+      (message: string) => {
+        toast.error(message);
+      }
+    );
+  };
+
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
@@ -109,7 +154,18 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Provide authentication-related data and functions through the context
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, token }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        register,
+        logout,
+        token,
+        email,
+        forgotPassword,
+        verifyOTP,
+      }}
+    >
       {isLoading ? <Loader /> : children}
     </AuthContext.Provider>
   );

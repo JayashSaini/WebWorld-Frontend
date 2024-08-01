@@ -40,5 +40,19 @@ const logoutUser = () => {
   return apiClient.get("/users/logout");
 };
 
+const forgotPasswordRequest = (email: string) => {
+  return apiClient.post("/users/forgot-password", { email });
+};
+
+const verifyOTPRequest = (data: { email: string; otp: string }) => {
+  return apiClient.post("/users/verify-otp", data);
+};
+
 // Export all the API functions
-export { loginUser, logoutUser, registerUser };
+export {
+  loginUser,
+  logoutUser,
+  registerUser,
+  forgotPasswordRequest,
+  verifyOTPRequest,
+};

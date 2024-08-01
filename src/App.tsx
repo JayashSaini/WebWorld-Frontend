@@ -1,7 +1,15 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import { About, Dashboard, Home, Login, Register } from "./pages";
+import {
+  About,
+  Dashboard,
+  ForgotPassword,
+  Home,
+  Login,
+  Register,
+  VerifyOTP,
+} from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
 
 function App() {
@@ -28,6 +36,24 @@ function App() {
           element={
             <PublicRoute>
               <Register />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/auth/forgot-password"
+          element={
+            <PublicRoute>
+              <ForgotPassword />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/auth/verify-otp"
+          element={
+            <PublicRoute>
+              <VerifyOTP />
             </PublicRoute>
           }
         />
