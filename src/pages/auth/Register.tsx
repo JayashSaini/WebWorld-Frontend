@@ -35,13 +35,13 @@ const Register: React.FC = () => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      <div className="m-auto sm:max-w-screen-sm w-full p-4">
+      <div className="m-auto sm:max-w-screen-sm w-full ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex justify-center items-center gap-3 flex-col "
         >
           <h1 className="md:text-4xl text-2xl text-center md:my-4 text-white custom-font">
-            Sign Up and Get Started{" "}
+            Sign up and Get Started{" "}
           </h1>
           {/* Input for entering the email */}
           <div className="w-full">
@@ -79,7 +79,7 @@ const Register: React.FC = () => {
           </div>
           {/* Button to initiate the login process */}
           <div className=" w-full mt-3">
-            <Button fullWidth>Sign in</Button>
+            <Button fullWidth>Sign up</Button>
           </div>
           {/* Link to the registration page */}
           <small className="text-zinc-300  text-sm mb-3">

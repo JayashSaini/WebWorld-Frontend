@@ -34,7 +34,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
-      <div className="m-auto sm:max-w-screen-sm w-full p-4">
+      <div className="m-auto sm:max-w-screen-sm w-full ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex justify-center items-center gap-3 flex-col "
