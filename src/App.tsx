@@ -1,19 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import {
-  About,
-  Dashboard,
-  EmailVerification,
-  EmailVerificationResult,
-  ForgotPassword,
-  Home,
-  Login,
-  Register,
-  VerifyOTP,
-} from "./pages";
-import { PrivateRoute, PublicRoute } from "./components";
-import ResetPassword from "./pages/auth/ResetPassword";
+import { About, Dashboard, Home } from "./pages";
+import AuthRoutesWrapper from "./routes/Auth.routes";
+import { PrivateRoute } from "./components";
 
 function App() {
   return (
@@ -25,71 +15,9 @@ function App() {
         <Route path="/about" element={<About />} />
 
         {/* Auth routes */}
-        <Route
-          path="/auth/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
+        <Route path="/auth/*" element={<AuthRoutesWrapper />} />
 
-        <Route
-          path="/auth/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/auth/forgot-password"
-          element={
-            <PublicRoute>
-              <ForgotPassword />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/auth/verify-otp"
-          element={
-            <PublicRoute>
-              <VerifyOTP />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/auth/reset-password/:token"
-          element={
-            <PublicRoute>
-              <ResetPassword />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/auth/email-verification"
-          element={
-            <PublicRoute>
-              <EmailVerification />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/auth/email-verification/:token"
-          element={
-            <PublicRoute>
-              <EmailVerificationResult />
-            </PublicRoute>
-          }
-        />
-
-        {/* Secure Routes  */}
-
+        {/* Secure Routes */}
         <Route
           path="/learn"
           element={

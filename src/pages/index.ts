@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import ForgotPassword from "./auth/ForgotPassword";
 import EmailVerification from "./auth/EmailVerification";
 import EmailVerificationResult from "./auth/EmailVerificationResult";
+import ResetPassword from "./auth/ResetPassword";
 import VerifyOTP from "./auth/VerifyOTP";
 import Dashboard from "./Dashboard";
 
@@ -16,6 +17,7 @@ export {
   Dashboard,
   ForgotPassword,
   VerifyOTP,
+  ResetPassword,
   EmailVerification,
   EmailVerificationResult,
 };
