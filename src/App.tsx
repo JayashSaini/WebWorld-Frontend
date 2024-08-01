@@ -11,6 +11,7 @@ import {
   VerifyOTP,
 } from "./pages";
 import { PrivateRoute, PublicRoute } from "./components";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
   return (
@@ -54,6 +55,15 @@ function App() {
           element={
             <PublicRoute>
               <VerifyOTP />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/auth/reset-password/:token"
+          element={
+            <PublicRoute>
+              <ResetPassword />
             </PublicRoute>
           }
         />

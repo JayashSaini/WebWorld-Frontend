@@ -5,6 +5,7 @@ import {
   loginUser,
   logoutUser,
   registerUser,
+  resetPasswordRequest,
   verifyOTPRequest,
 } from "../api";
 import { Loader } from "../components";
@@ -26,6 +27,11 @@ const AuthContext = createContext<{
   logout: () => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
   verifyOTP: (data: { email: string; otp: string }) => Promise<void>;
+  resetPassword: (data: {
+    token: string;
+    newPassword: string;
+    confirmPassword: string;
+  }) => Promise<void>;
 }>({
   user: null,
   email: null,
@@ -35,6 +41,7 @@ const AuthContext = createContext<{
   logout: async () => {},
   forgotPassword: async () => {},
   verifyOTP: async () => {},
+  resetPassword: async () => {},
 });
 
 // Create a hook to access the AuthContext
@@ -138,6 +145,24 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  const resetPassword = async (data: {
+    token: string;
+    newPassword: string;
+    confirmPassword: string;
+  }) => {
+    await requestHandler(
+      async () => await resetPasswordRequest(data),
+      setIsLoading,
+      () => {
+        toast.success("Password reset successfully!");
+        navigate("/auth/login");
+      },
+      (message: string) => {
+        toast.error(message);
+      }
+    );
+  };
+
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
@@ -164,6 +189,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         email,
         forgotPassword,
         verifyOTP,
+        resetPassword,
       }}
     >
       {isLoading ? <Loader /> : children}

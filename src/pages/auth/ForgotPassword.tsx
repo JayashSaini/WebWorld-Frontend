@@ -1,31 +1,37 @@
-// Importing necessary components and hooks
-import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Button } from "../../components";
 import { useAuth } from "../../context/auth.context.tsx";
 import { Link } from "react-router-dom";
-import { toast } from "sonner";
+import { userForgotPasswordSchema } from "../../util/schema.ts";
 
-// Component for the Login page
+// Defining the form input interface
+interface IFormInput {
+  email: string;
+}
+
 const ForgotPassword: React.FC = () => {
-  const [email, setEmail] = useState("");
-
   const { forgotPassword } = useAuth();
 
-  // Function to handle the login process
-  const onSubmit = async (e: any) => {
-    e.preventDefault();
+  // Setting up React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>({
+    resolver: yupResolver(userForgotPasswordSchema),
+  });
 
-    if (!email) return toast.error("Please enter an email address.");
-    forgotPassword(email);
+  // Function to handle form submission
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    await forgotPassword(data.email);
   };
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="m-auto sm:max-w-screen-sm w-full ">
         <form
-          onSubmit={(e) => {
-            onSubmit(e);
-          }}
+          onSubmit={handleSubmit(onSubmit)}
           className="w-full flex justify-center items-center gap-3 flex-col "
         >
           <h1 className="md:text-4xl text-2xl text-center md:my-4 text-white custom-font">
@@ -36,17 +42,19 @@ const ForgotPassword: React.FC = () => {
             <Input
               placeholder="Enter the email..."
               type="email"
-              value={email}
-              required={true}
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email")}
+              required
             />
+            {errors.email && (
+              <p className="text-red-500">{errors.email.message}</p>
+            )}
           </div>
-          {/* Button to initiate the login process */}
+          {/* Button to initiate the OTP process */}
           <div className="w-full mt-3">
             <Button fullWidth>Send OTP</Button>
           </div>
           {/* Link to the registration page */}
-          <small className="text-zinc-300  text-sm mb-3">
+          <small className="text-zinc-300 text-sm mb-3">
             <Link className="text-blue-400 hover:underline" to="/auth/register">
               Back to login
             </Link>

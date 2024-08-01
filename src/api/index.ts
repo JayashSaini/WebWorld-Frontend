@@ -48,6 +48,17 @@ const verifyOTPRequest = (data: { email: string; otp: string }) => {
   return apiClient.post("/users/verify-otp", data);
 };
 
+const resetPasswordRequest = (data: {
+  newPassword: string;
+  confirmPassword: string;
+  token: string;
+}) => {
+  return apiClient.post(`/users/reset-password/${data.token}`, {
+    newPassword: data.newPassword,
+    confirmPassword: data.confirmPassword,
+  });
+};
+
 // Export all the API functions
 export {
   loginUser,
@@ -55,4 +66,5 @@ export {
   registerUser,
   forgotPasswordRequest,
   verifyOTPRequest,
+  resetPasswordRequest,
 };

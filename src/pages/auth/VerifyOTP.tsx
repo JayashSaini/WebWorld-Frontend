@@ -65,7 +65,10 @@ const VerifyOTP: React.FC = () => {
           </div>
           {/* Link to resend OTP */}
           <small className="text-zinc-300 text-sm mb-3">
-            <Link className="text-blue-400 hover:underline" to="/auth/register">
+            <Link
+              className="text-blue-400 hover:underline"
+              to="/auth/forgot-password"
+            >
               Resend OTP
             </Link>
           </small>
