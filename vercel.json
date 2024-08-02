@@ -11,6 +11,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/auth/google/error",
+      "destination": "/index.html"
+    },
+    {
       "source": "/auth/google/:accessToken/:refreshToken",
       "destination": "/index.html"
     },

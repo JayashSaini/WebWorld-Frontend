@@ -10,6 +10,7 @@ import EmailVerificationHandler from "./auth/EmailVerificationHandler";
 import ResetPassword from "./auth/ResetPassword";
 import VerifyOTP from "./auth/VerifyOTP";
 import SocialAuthCallback from "./auth/SocialAuthCallback";
+import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
 
 // dashboard routes
 import Dashboard from "./Dashboard/Dashboard";
@@ -25,5 +26,6 @@ export {
   EmailVerification,
   EmailVerificationHandler,
   SocialAuthCallback,
+  SocialAuthErrorHandler,
   Dashboard,
 };

@@ -10,6 +10,7 @@ import {
   EmailVerification,
   EmailVerificationHandler,
   SocialAuthCallback,
+  SocialAuthErrorHandler,
 } from "../pages";
 import { PublicRoute } from "../components";
 
@@ -29,6 +30,7 @@ const AuthRoutes: React.FC = () => (
       path="/google/:accessToken/:refreshToken"
       element={<SocialAuthCallback />}
     />
+    <Route path="/google/error" element={<SocialAuthErrorHandler />} />
   </Routes>
 );
 
