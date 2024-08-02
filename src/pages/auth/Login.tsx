@@ -32,6 +32,12 @@ const Login: React.FC = () => {
     await login(data);
   };
 
+  const onGoogleSignIn = async () => {
+    window.location.href = `${
+      import.meta.env.VITE_BACKEND_URI
+    }/api/v1/users/google`;
+  };
+
   return (
     <div className="w-full h-screen flex items-center justify-center">
       <div className="m-auto sm:max-w-screen-sm w-full ">
@@ -86,7 +92,7 @@ const Login: React.FC = () => {
             </Link>
           </small>
         </form>
-        <Button severity="secondary">
+        <Button severity="secondary" onClick={onGoogleSignIn}>
           <img src={google} alt="" className="w-[38px]" />
           <span className="text-white">Sign in with Google</span>
         </Button>

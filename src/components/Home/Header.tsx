@@ -16,22 +16,11 @@ const Header = () => {
 
   useEffect(() => {
     timeline.add(
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.3, delay: 0.3 }
-      ),
+      gsap.to(headingRef.current, { opacity: 1, duration: 0.3, delay: 0.3 }),
       0
     );
     // Add button animation
-    timeline.add(
-      gsap.fromTo(
-        buttonRef.current,
-        { opacity: 0, y: 3 },
-        { opacity: 1, y: 0, duration: 0.3 }
-      ),
-      1
-    );
+    timeline.add(gsap.to(buttonRef.current, { opacity: 1, duration: 0.3 }), 1);
 
     // Update the isLoggedIn state whenever user or token changes
     setIsLoggedIn(!!user && !!token);
@@ -39,14 +28,14 @@ const Header = () => {
 
   return (
     <nav className="w-full flex items-center justify-between md:py-5 py-4 ">
-      <Link to="/" ref={headingRef}>
+      <Link to="/" ref={headingRef} className="opacity-0">
         <h1 className="custom-font md:text-3xl text-2xl font-semibold">
           <img src={logo} alt="web world" className="md:w-[170px] w-[150px]" />
         </h1>
       </Link>
       <button
         ref={buttonRef}
-        className="button"
+        className="button opacity-0"
         onClick={() => {
           if (!isLoggedIn) {
             navigate("/auth/login");
@@ -55,7 +44,7 @@ const Header = () => {
           }
         }}
       >
-        {isLoggedIn ? "Dashboard" : "Sign In"}
+        {isLoggedIn ? "Courses" : "Sign In"}
       </button>
     </nav>
   );
