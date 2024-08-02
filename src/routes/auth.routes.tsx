@@ -8,7 +8,8 @@ import {
   VerifyOTP,
   ResetPassword,
   EmailVerification,
-  EmailVerificationResult,
+  EmailVerificationHandler,
+  SocialAuthCallback,
 } from "../pages";
 import { PublicRoute } from "../components";
 
@@ -22,7 +23,11 @@ const AuthRoutes: React.FC = () => (
     <Route path="/email-verification" element={<EmailVerification />} />
     <Route
       path="/email-verification/:token"
-      element={<EmailVerificationResult />}
+      element={<EmailVerificationHandler />}
+    />
+    <Route
+      path="/google/:accessToken/:refreshToken"
+      element={<SocialAuthCallback />}
     />
   </Routes>
 );

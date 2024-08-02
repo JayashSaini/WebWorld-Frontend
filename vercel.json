@@ -10,7 +10,10 @@
       "source": "/auth/email-verification/:token",
       "destination": "/index.html"
     },
-
+    {
+      "source": "/auth/google/:accessToken/:refreshToken",
+      "destination": "/index.html"
+    },
     {
       "source": "/api/(.*)",
       "destination": "https://webworld.onrender.com/api/$1"

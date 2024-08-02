@@ -1,9 +1,9 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-import { About, Dashboard, Home } from "./pages";
-import AuthRoutesWrapper from "./routes/Auth.routes";
-import { PrivateRoute } from "./components";
+import { About, Home } from "./pages";
+import AuthRoutesWrapper from "./routes/auth.routes";
+import DashboardRoutesWrapper from "./routes/dashboard.routes";
 
 function App() {
   return (
@@ -17,15 +17,7 @@ function App() {
         {/* Auth routes */}
         <Route path="/auth/*" element={<AuthRoutesWrapper />} />
 
-        {/* Secure Routes */}
-        <Route
-          path="/learn"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/learn/*" element={<DashboardRoutesWrapper />} />
 
         {/* 404 page */}
         <Route

@@ -40,6 +40,10 @@ const logoutUser = () => {
   return apiClient.get("/users/logout");
 };
 
+const selfUser = () => {
+  return apiClient.get("/users/self");
+};
+
 const forgotPasswordRequest = (email: string) => {
   return apiClient.post("/users/forgot-password", { email });
 };
@@ -66,11 +70,13 @@ const resendEmailVerificationRequest = (email: string) => {
 const verifyEmailRequest = (token: string) => {
   return apiClient.get(`/users/verify-email/${token}`);
 };
+
 // Export all the API functions
 export {
   loginUser,
   logoutUser,
   registerUser,
+  selfUser,
   forgotPasswordRequest,
   verifyOTPRequest,
   resetPasswordRequest,

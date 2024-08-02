@@ -6,6 +6,7 @@ import {
   logoutUser,
   registerUser,
   resetPasswordRequest,
+  selfUser,
   verifyOTPRequest,
 } from "../api";
 import { Loader } from "../components";
@@ -32,6 +33,7 @@ const AuthContext = createContext<{
     newPassword: string;
     confirmPassword: string;
   }) => Promise<void>;
+  setUserState: (token: string) => Promise<void>;
 }>({
   user: null,
   email: null,
@@ -42,6 +44,7 @@ const AuthContext = createContext<{
   forgotPassword: async () => {},
   verifyOTP: async () => {},
   resetPassword: async () => {},
+  setUserState: async () => {},
 });
 
 // Create a hook to access the AuthContext
@@ -65,6 +68,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading,
       (res) => {
         const { data } = res;
+        console.log("resi s :", res);
         setUser(data);
         setToken(data.accessToken);
         LocalStorage.set("user", data.user);
@@ -164,6 +168,24 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  const setUserState = async (token: string) => {
+    await requestHandler(
+      async () => selfUser(),
+      setIsLoading,
+      (res) => {
+        const { data } = res;
+        setUser(data);
+        setToken(token);
+        LocalStorage.set("user", data);
+        LocalStorage.set("token", token);
+        navigate("/learn");
+      },
+      (message) => {
+        toast.error(message);
+      }
+    );
+  };
+
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
@@ -191,6 +213,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         forgotPassword,
         verifyOTP,
         resetPassword,
+        setUserState,
       }}
     >
       {isLoading ? <Loader /> : children}

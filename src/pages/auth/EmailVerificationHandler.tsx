@@ -5,7 +5,7 @@ import { verifyEmailRequest } from "../../api";
 import { requestHandler } from "../../util";
 import { Loader } from "../../components";
 
-const EmailVerificationResult = () => {
+const EmailVerificationHandler = () => {
   const { token } = useParams();
   const navigate = useNavigate();
 
@@ -31,4 +31,4 @@ const EmailVerificationResult = () => {
   return <Loader />;
 };
 
-export default EmailVerificationResult;
+export default EmailVerificationHandler;
