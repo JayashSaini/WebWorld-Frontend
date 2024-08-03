@@ -19,6 +19,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/dashboard/(.*)",
+      "destination": "/index.html"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "https://webworld.onrender.com/api/$1"
     },

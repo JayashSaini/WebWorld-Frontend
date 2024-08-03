@@ -15,7 +15,11 @@
 }
 
 .custom-main-bg {
-  background-color: #0d1625;
+  background-color: #0f172a;
+}
+
+.custom-secondary-bg {
+  background-color: #1d273b;
 }
 
 /* custom height  */

@@ -13,7 +13,10 @@ import SocialAuthCallback from "./auth/SocialAuthCallback";
 import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
 
 // dashboard routes
-import Dashboard from "./Dashboard/Dashboard";
+import Courses from "./Dashboard/Courses";
+
+// blogs routes
+import Blogs from "./Dashboard/Blogs";
 
 export {
   Home,
@@ -27,5 +30,6 @@ export {
   EmailVerificationHandler,
   SocialAuthCallback,
   SocialAuthErrorHandler,
-  Dashboard,
+  Courses,
+  Blogs,
 };

@@ -17,7 +17,7 @@ function App() {
         {/* Auth routes */}
         <Route path="/auth/*" element={<AuthRoutesWrapper />} />
 
-        <Route path="/learn/*" element={<DashboardRoutesWrapper />} />
+        <Route path="/dashboard/*" element={<DashboardRoutesWrapper />} />
 
         {/* 404 page */}
         <Route

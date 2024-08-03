@@ -73,7 +73,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setToken(data.accessToken);
         LocalStorage.set("user", data.user);
         LocalStorage.set("token", data.accessToken);
-        navigate("/learn");
+        navigate("/dashboard/courses");
       },
       (message: string) => {
         toast.error(message);
@@ -178,7 +178,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setToken(token);
         LocalStorage.set("user", data);
         LocalStorage.set("token", token);
-        navigate("/learn");
+        navigate("/dashboard/courses");
       },
       (message) => {
         toast.error(message);

@@ -1,25 +1,11 @@
-import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
-import { useAnimation } from "../context/animation.context";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data.tsx";
 import About from "./About";
 import { HomeFooter, HomeHeader, CardCarousal } from "../components/index.ts";
 
 const Home: React.FC = () => {
-  const { timeline } = useAnimation();
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const featureRef = useRef<HTMLDivElement>(null);
-  const courseRef = useRef<HTMLDivElement>(null);
-
   const [displayProjects, setDisplayProjects] = useState<Project[]>([]);
-
-  // Animation effect for heading on component mount
-  const gsapAnimation = () => {
-    timeline.add(gsap.to(headingRef.current, { opacity: 1, duration: 0.3 }), 2);
-    timeline.add(gsap.to(featureRef.current, { opacity: 1, duration: 0.3 }), 3);
-    timeline.add(gsap.to(courseRef.current, { opacity: 1, duration: 0.3 }), 4);
-  };
 
   // Function to handle media query changes and update displayProjects state
   const handleViewportChange = (e: MediaQueryListEvent) => {
@@ -33,12 +19,11 @@ const Home: React.FC = () => {
   useEffect(() => {
     const mediaQuery: any = window.matchMedia("(max-width: 768px)");
 
-    gsapAnimation();
     handleViewportChange(mediaQuery);
 
     mediaQuery.addListener(handleViewportChange);
     return () => mediaQuery.removeListener(handleViewportChange);
-  }, [timeline]);
+  }, []);
 
   // Function to slice projects array based on count
   const sliceProjects = (count: number) => {
@@ -46,30 +31,24 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="max-w-screen-xl w-full md:px-8 px-2 m-auto">
       {/* Header section */}
       <HomeHeader />
 
       {/* Hero section */}
       <section className="w-full md:mt-32 mt-20">
-        <h2
-          ref={headingRef}
-          className="lg:text-8xl md:text-6xl text-5xl custom-font opacity-0"
-        >
+        <h2 className="lg:text-8xl md:text-6xl text-5xl custom-font ">
           An Online <span>Learning</span> Platform, For Web Developers{" "}
         </h2>
       </section>
 
       {/* Features section */}
-      <section
-        ref={featureRef}
-        className="w-full md:mt-40 mt-6 mx-auto opacity-0"
-      >
+      <section className="w-full md:mt-40 mt-6 mx-auto ">
         <HoverEffect items={displayProjects} />
       </section>
 
       {/* courses section */}
-      <section ref={courseRef} className="w-full opacity-0">
+      <section className="w-full ">
         <CardCarousal />
       </section>
 

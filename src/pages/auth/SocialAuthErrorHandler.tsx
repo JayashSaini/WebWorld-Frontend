@@ -11,7 +11,6 @@ const SocialAuthErrorHandler = () => {
     // Extract query parameters from the URL
     const queryParams = new URLSearchParams(location.search);
     setError(queryParams.get("error") || null);
-    console.log("queryParams: ", error);
   }, []);
 
   return (
