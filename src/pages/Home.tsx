@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data.tsx";
 import About from "./About";
