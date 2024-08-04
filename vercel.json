@@ -23,6 +23,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/site/(.*)",
+      "destination": "/index.html"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "https://webworld.onrender.com/api/$1"
     },

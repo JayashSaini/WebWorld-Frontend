@@ -1,9 +1,9 @@
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import AuthRoutesWrapper from "./routes/auth.routes";
 import DashboardRoutesWrapper from "./routes/dashboard.routes";
-import { About, Home } from "./pages";
+import { Home } from "./pages";
 import SiteRoutesWrapper from "./routes/site.routes";
 
 function App() {
