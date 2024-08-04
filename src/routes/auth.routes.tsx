@@ -13,24 +13,27 @@ import {
   SocialAuthErrorHandler,
 } from "../pages";
 import { PublicRoute } from "../components";
+import AuthLayout from "../layouts/Auth.layout";
 
 const AuthRoutes: React.FC = () => (
   <Routes>
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/forgot-password" element={<ForgotPassword />} />
-    <Route path="/verify-otp" element={<VerifyOTP />} />
-    <Route path="/reset-password/:token" element={<ResetPassword />} />
-    <Route path="/email-verification" element={<EmailVerification />} />
-    <Route
-      path="/email-verification/:token"
-      element={<EmailVerificationHandler />}
-    />
-    <Route
-      path="/google/:accessToken/:refreshToken"
-      element={<SocialAuthCallback />}
-    />
-    <Route path="/google/error" element={<SocialAuthErrorHandler />} />
+    <Route path="/" element={<AuthLayout />}>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/verify-otp" element={<VerifyOTP />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
+      <Route path="/email-verification" element={<EmailVerification />} />
+      <Route
+        path="/email-verification/:token"
+        element={<EmailVerificationHandler />}
+      />
+      <Route
+        path="/google/:accessToken/:refreshToken"
+        element={<SocialAuthCallback />}
+      />
+      <Route path="/google/error" element={<SocialAuthErrorHandler />} />
+    </Route>
   </Routes>
 );
 

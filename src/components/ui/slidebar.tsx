@@ -80,7 +80,10 @@ export const MobileSidebar = ({
         {...props}
       >
         <div className="flex justify-between items-center z-20 w-full">
-          <img src={weblogo} alt="" className="w-[110px] " />
+          <Link to="/">
+            {" "}
+            <img src={weblogo} alt="" className="w-[110px] " />
+          </Link>
           <IconMenu2
             className="text-neutral-800 dark:text-neutral-200"
             onClick={() => setOpen(!open)}

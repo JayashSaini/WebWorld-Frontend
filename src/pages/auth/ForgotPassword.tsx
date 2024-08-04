@@ -28,40 +28,38 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      <div className="m-auto sm:max-w-screen-sm w-full ">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex justify-center items-center gap-3 flex-col "
-        >
-          <h1 className="md:text-4xl text-2xl text-center md:my-4 text-white custom-font">
-            Forgot Password
-          </h1>
-          {/* Input for entering the email */}
-          <div className="w-full">
-            <Input
-              placeholder="Enter the email..."
-              type="email"
-              {...register("email")}
-              required
-            />
-            {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
-            )}
-          </div>
-          {/* Button to initiate the OTP process */}
-          <div className="w-full mt-3">
-            <Button fullWidth>Send OTP</Button>
-          </div>
-          {/* Link to the registration page */}
-          <small className="text-zinc-300 text-sm mb-3">
-            <Link className="text-blue-400 hover:underline" to="/auth/register">
-              Back to login
-            </Link>
-          </small>
-        </form>
-      </div>
-    </div>
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex justify-center items-center gap-3 flex-col "
+      >
+        <h1 className="md:text-4xl text-2xl text-center md:my-4 text-white custom-font">
+          Forgot Password
+        </h1>
+        {/* Input for entering the email */}
+        <div className="w-full">
+          <Input
+            placeholder="Enter the email..."
+            type="email"
+            {...register("email")}
+            required
+          />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
+        </div>
+        {/* Button to initiate the OTP process */}
+        <div className="w-full mt-3">
+          <Button fullWidth>Send OTP</Button>
+        </div>
+        {/* Link to the registration page */}
+        <small className="text-zinc-300 text-sm mb-3">
+          <Link className="text-blue-400 hover:underline" to="/auth/register">
+            Back to login
+          </Link>
+        </small>
+      </form>
+    </>
   );
 };
 

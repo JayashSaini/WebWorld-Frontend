@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data.tsx";
 import About from "./About";
-import { HomeFooter, HomeHeader, CardCarousal } from "../components/index.ts";
+import { CardCarousal, HomeFooter, HomeHeader } from "../components/index.ts";
 
 const Home: React.FC = () => {
   const [displayProjects, setDisplayProjects] = useState<Project[]>([]);
@@ -31,10 +31,9 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="max-w-screen-xl w-full md:px-8 px-2 m-auto">
+    <div className="max-w-screen-xl w-full md:px-8 px-2 m-auto px-2">
       {/* Header section */}
       <HomeHeader />
-
       {/* Hero section */}
       <section className="w-full md:mt-32 mt-20">
         <h2 className="lg:text-8xl md:text-6xl text-5xl custom-font ">
@@ -55,7 +54,6 @@ const Home: React.FC = () => {
       {/* About section */}
       <About />
 
-      {/* Footer  */}
       <HomeFooter />
     </div>
   );

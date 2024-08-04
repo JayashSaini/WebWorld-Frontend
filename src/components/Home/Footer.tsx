@@ -30,7 +30,7 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/about" className="hover:underline">
+                  <a href="/site/about" className="hover:underline">
                     About Us
                   </a>{" "}
                 </li>

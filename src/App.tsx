@@ -1,22 +1,26 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./Layout";
-import { About, Home } from "./pages";
 import AuthRoutesWrapper from "./routes/auth.routes";
 import DashboardRoutesWrapper from "./routes/dashboard.routes";
+import { About, Home } from "./pages";
+import SiteRoutesWrapper from "./routes/site.routes";
 
 function App() {
   return (
     <Routes>
       {/* Wrap all routes with Layout */}
       <Route path="/" element={<Layout />}>
-        {/* Public routes */}
+        {/* site routes */}
         <Route index={true} path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+
+        {/* Site routes  */}
+        <Route path="/site*" element={<SiteRoutesWrapper />} />
 
         {/* Auth routes */}
         <Route path="/auth/*" element={<AuthRoutesWrapper />} />
 
+        {/* Dashboard routes */}
         <Route path="/dashboard/*" element={<DashboardRoutesWrapper />} />
 
         {/* 404 page */}

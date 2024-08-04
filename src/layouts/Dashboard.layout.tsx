@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "./components/ui/slidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/slidebar";
 import {
   IconArrowLeft,
   IconCertificate,
@@ -8,9 +8,9 @@ import {
   IconUserBolt,
 } from "@tabler/icons-react";
 import { Link, Outlet } from "react-router-dom";
-import { cn } from "./lib/utils";
-import weblogoicon from "./assets/weblogoicon.png";
-import weblogo from "./assets/weblogo.svg";
+import { cn } from "../lib/utils";
+import weblogoicon from "../assets/weblogoicon.png";
+import weblogo from "../assets/weblogo.svg";
 
 function DashboardLayout() {
   const links = [

@@ -37,23 +37,21 @@ const EmailVerification = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="sm:max-w-screen-sm w-full ">
-        <h1 className="md:text-3xl text-2xl text-center md:my-4 text-white custom-font">
-          Check your email for verification link
-        </h1>
-        <p className="text-base text-center">
-          A verification link has been sent to your email address:{" "}
-          <span className="text-[#f68c23]">{email}</span>
-          <br />
-          Please check your email and click on the link provided to complete
-          your account registration.
-        </p>
-        <div className="mt-3 ">
-          <Button onClick={onResendMail}>Resend Mail</Button>
-        </div>
+    <>
+      <h1 className="md:text-3xl text-2xl text-center md:my-4 text-white custom-font">
+        Check your email for verification link
+      </h1>
+      <p className="text-base text-center">
+        A verification link has been sent to your email address:{" "}
+        <span className="text-[#f68c23]">{email}</span>
+        <br />
+        Please check your email and click on the link provided to complete your
+        account registration.
+      </p>
+      <div className="mt-3 ">
+        <Button onClick={onResendMail}>Resend Mail</Button>
       </div>
-    </div>
+    </>
   );
 };
 

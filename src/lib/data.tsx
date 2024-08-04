@@ -72,18 +72,7 @@ export const cardCarouselData = [
       />
     ),
   },
-  {
-    category: "Next.js",
-    title: "Advance Your Skills with Next.js.",
-    src: nextjsImage,
-    content: (
-      <DummyContent
-        title="Unlock the Power of Next.js: A Step-by-Step Approach to Server-Side Rendering with Hitesh Choudhary."
-        paragraph="Learn to build server-side rendered React applications with Next.js through detailed tutorials that guide you in optimizing performance and SEO for modern web applications."
-        image={nextImagePoster}
-      />
-    ),
-  },
+
   {
     category: "HTML",
     title: "Fundamentals of HTML.",
@@ -105,6 +94,18 @@ export const cardCarouselData = [
         title="Become Proficient in Node.js: In-Depth Lessons and Real-World Examples with Piyush Garg."
         paragraph="Explore server-side JavaScript programming with Node.js through a detailed course that teaches you how to create scalable backend services and applications using practical examples and best practices."
         image={nodeImagePoster}
+      />
+    ),
+  },
+  {
+    category: "Next.js",
+    title: "Advance Your Skills with Next.js.",
+    src: nextjsImage,
+    content: (
+      <DummyContent
+        title="Unlock the Power of Next.js: A Step-by-Step Approach to Server-Side Rendering with Hitesh Choudhary."
+        paragraph="Learn to build server-side rendered React applications with Next.js through detailed tutorials that guide you in optimizing performance and SEO for modern web applications."
+        image={nextImagePoster}
       />
     ),
   },

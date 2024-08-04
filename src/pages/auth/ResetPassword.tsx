@@ -45,45 +45,43 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      <div className="m-auto sm:max-w-screen-sm w-full">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex justify-center items-center gap-3 flex-col"
-        >
-          <h1 className="md:text-4xl text-2xl text-center md:my-4 text-white custom-font">
-            Reset Password
-          </h1>
-          {/* Input for entering the new password */}
-          <div className="w-full">
-            <Input
-              placeholder="Enter the New Password..."
-              type="password"
-              {...register("newPassword")}
-              required
-            />
-            {errors.newPassword && (
-              <p className="text-red-500">{errors.newPassword.message}</p>
-            )}
-          </div>
-          <div className="w-full">
-            <Input
-              placeholder="Enter the Confirm Password..."
-              type="password"
-              {...register("confirmPassword")}
-              required
-            />
-            {errors.confirmPassword && (
-              <p className="text-red-500">{errors.confirmPassword.message}</p>
-            )}
-          </div>
-          {/* Button to initiate the password change process */}
-          <div className="w-full mt-3">
-            <Button fullWidth>Change Password</Button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex justify-center items-center gap-3 flex-col"
+      >
+        <h1 className="md:text-4xl text-2xl text-center md:my-4 text-white custom-font">
+          Reset Password
+        </h1>
+        {/* Input for entering the new password */}
+        <div className="w-full">
+          <Input
+            placeholder="Enter the New Password..."
+            type="password"
+            {...register("newPassword")}
+            required
+          />
+          {errors.newPassword && (
+            <p className="text-red-500">{errors.newPassword.message}</p>
+          )}
+        </div>
+        <div className="w-full">
+          <Input
+            placeholder="Enter the Confirm Password..."
+            type="password"
+            {...register("confirmPassword")}
+            required
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500">{errors.confirmPassword.message}</p>
+          )}
+        </div>
+        {/* Button to initiate the password change process */}
+        <div className="w-full mt-3">
+          <Button fullWidth>Change Password</Button>
+        </div>
+      </form>
+    </>
   );
 };
 
