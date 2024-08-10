@@ -15,7 +15,7 @@ function App() {
         <Route index={true} path="/" element={<Home />} />
 
         {/* Site routes  */}
-        <Route path="/site*" element={<SiteRoutesWrapper />} />
+        <Route path="/site/*" element={<SiteRoutesWrapper />} />
 
         {/* Auth routes */}
         <Route path="/auth/*" element={<AuthRoutesWrapper />} />

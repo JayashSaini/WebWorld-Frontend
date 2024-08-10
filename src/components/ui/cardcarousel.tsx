@@ -209,7 +209,7 @@ export const Card = ({
               exit={{ opacity: 0 }}
               ref={containerRef}
               layoutId={layout ? `card-${card.title}` : undefined}
-              className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit  z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
+              className="max-w-5xl mx-auto bg-neutral-900 h-fit  z-[60] my-10 p-4 md:p-10 rounded-3xl font-sans relative"
             >
               <button
                 className="sticky top-4 h-8 w-8 right-0 ml-auto bg-black dark:bg-white rounded-full flex items-center justify-center"
@@ -219,17 +219,17 @@ export const Card = ({
               </button>
               <motion.p
                 layoutId={layout ? `category-${card.title}` : undefined}
-                className="text-base font-medium text-black dark:text-white"
+                className="text-base font-medium text-white"
               >
                 {card.category}
               </motion.p>
               <motion.p
                 layoutId={layout ? `title-${card.title}` : undefined}
-                className="text-2xl md:text-6xl font-semibold text-neutral-700 mt-4 dark:text-white"
+                className="text-2xl md:text-6xl font-semibold mt-4 text-white"
               >
                 {card.title}
               </motion.p>
-              <div className="py-10">{card.content}</div>
+              <div className="py-10 text-white ">{card.content}</div>
             </motion.div>
           </div>
         )}
@@ -237,7 +237,7 @@ export const Card = ({
       <motion.button
         layoutId={layout ? `card-${card.title}` : undefined}
         onClick={handleOpen}
-        className="rounded-3xl bg-gray-100 dark:bg-neutral-900 h-80 w-56 md:h-[470px] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10 shadow-gray-800 shadow-md "
+        className="rounded-3xl bg-neutral-900 h-80 w-56 md:h-[470px] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10  "
       >
         <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
         <div className="relative z-40 p-8">
@@ -303,11 +303,8 @@ export const DummyContent = ({
 }) => {
   return (
     <div className="bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
-      <p className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans ">
-        <span className="font-bold text-neutral-700 dark:text-neutral-200">
-          {title}
-        </span>{" "}
-        {paragraph}
+      <p className="text-neutral-400 text-base md:text-2xl font-sans ">
+        <span className="font-bold text-neutral-200">{title}</span> {paragraph}
       </p>
       <img
         src={image}

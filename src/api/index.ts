@@ -71,6 +71,44 @@ const verifyEmailRequest = (token: string) => {
   return apiClient.get(`/users/verify-email/${token}`);
 };
 
+// blogs api's
+
+const addBlog = (data: {
+  heading: string;
+  subHeading: string;
+  content: string;
+  blogImage: string;
+  blogCategory: string;
+}) => {
+  return apiClient.post("/blogs", data);
+};
+
+const getAllBlogs = (sortType = "trending", page = 1, limit = 6) => {
+  return apiClient.get(
+    `/blogs/?page=${page}&limit=${limit}&sortType=${sortType}`
+  );
+};
+
+const getBlogById = (blogId: string) => {
+  return apiClient.get(`/blogs/${blogId}`);
+};
+
+const deleteBlog = (blogId: string) => {
+  return apiClient.delete(`/blogs/${blogId}`);
+};
+
+const getFavoritesBlog = (page = 1, limit = 6) => {
+  return apiClient.get(`/b/likes/self/?page=${page}&limit=${limit}`);
+};
+
+const getMyBlogs = (page = 1, limit = 6) => {
+  return apiClient.get(`/blogs/self/blogs/?page=${page}&limit=${limit}`);
+};
+
+const toggleBlogLike = (blogId: string) => {
+  return apiClient.post(`/b/likes/${blogId}`);
+};
+
 // Export all the API functions
 export {
   loginUser,
@@ -82,4 +120,11 @@ export {
   resetPasswordRequest,
   resendEmailVerificationRequest,
   verifyEmailRequest,
+  addBlog,
+  getAllBlogs,
+  getBlogById,
+  getFavoritesBlog,
+  toggleBlogLike,
+  getMyBlogs,
+  deleteBlog,
 };

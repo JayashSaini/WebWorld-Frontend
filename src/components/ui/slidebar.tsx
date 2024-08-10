@@ -2,7 +2,7 @@ import { cn } from "../../lib/utils";
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import { Link, LinkProps } from "react-router-dom";
+import { Link, LinkProps, NavLink } from "react-router-dom";
 import weblogo from "../../assets/weblogo.svg";
 import { SidebarProvider, useSidebar } from "../../context/slider.context";
 
@@ -10,6 +10,7 @@ interface Links {
   label: string;
   href: string;
   icon: React.JSX.Element | React.ReactNode;
+  onClick?: () => void;
 }
 
 export const Sidebar = ({
@@ -129,13 +130,20 @@ export const SidebarLink = ({
   props?: LinkProps;
 }) => {
   const { open, animate, setOpen } = useSidebar();
-  return (
-    <Link
+  return link?.onClick ? (
+    <div
+      className="flex items-center text-white justify-start gap-2  group/sidebar py-2"
+      onClick={link.onClick}
+    >
+      {link.icon}
+      {link.label}
+    </div>
+  ) : (
+    <NavLink
       to={link.href}
-      className={cn(
-        "flex items-center justify-start gap-2  group/sidebar py-2",
-        className
-      )}
+      className={
+        "flex items-center text-white justify-start gap-2  group/sidebar py-2"
+      }
       {...props}
       onClick={() => {
         if (open) setOpen(false);
@@ -148,10 +156,10 @@ export const SidebarLink = ({
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className="text-white text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
       >
         {link.label}
       </motion.span>
-    </Link>
+    </NavLink>
   );
 };

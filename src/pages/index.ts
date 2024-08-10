@@ -16,7 +16,12 @@ import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
 import Courses from "./Dashboard/Courses";
 
 // blogs routes
-import Blogs from "./Dashboard/Blogs";
+import Blogs from "./Dashboard/blogs/blogs";
+import AddBlogs from "./Dashboard/blogs/addBlog";
+import MyBlogs from "./Dashboard/blogs/myBlogs";
+import Blog from "./Dashboard/blogs/blog";
+import Profile from "./Dashboard/Profile";
+import Settings from "./Dashboard/Settings";
 
 export {
   Home,
@@ -32,4 +37,9 @@ export {
   SocialAuthErrorHandler,
   Courses,
   Blogs,
+  AddBlogs,
+  MyBlogs,
+  Blog,
+  Profile,
+  Settings,
 };

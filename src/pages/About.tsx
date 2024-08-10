@@ -8,7 +8,7 @@ const About: React.FC = () => {
       </div>
       <div className="md:w-1/2 w-full">
         <h1 className="md:text-4xl text-3xl custom-font font-semibold">
-          About Us
+          <span>About Us</span>
         </h1>
         <p className="text-base md:w-4/5 w-full">
           Welcome to our online learning platform tailored for web developers.
