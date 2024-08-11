@@ -14,7 +14,7 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogsType }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
   const [showMoreLoader, setShowMoreLoader] = useState<boolean>(false);
-  const [limit, setLimit] = useState<number>(6);
+  const limit = 6;
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
 
   const blogsHandler = useCallback(async () => {
@@ -125,9 +125,8 @@ const BlogSection: React.FC<BlogSectionProps> = ({ blogsType }) => {
         ) : (
           <div className="w-full mt-20 flex items-center justify-center ">
             <button
-              className="py-2 px-5 border-[#2e8f83] border-[1px] text-base text-white hover:text-[#12332f] rounded hover:bg-[#34a394] duration-150 ease-in-out"
+              className="py-2 px-5 border-[#fff] border-[1px] text-base text-white  rounded  duration-150 ease-in-out"
               onClick={() => {
-                setLimit((prev) => prev + 6);
                 setPage((prev) => prev + 1);
               }}
             >

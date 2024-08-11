@@ -7,16 +7,18 @@ import { requestHandler } from "../../../util";
 import { useAuth } from "../../../context/auth.context";
 import Loader from "../../../components/Loader";
 import { BlogInterface as BlogData } from "../../../interfaces/blog";
+import { UserInterface } from "../../../interfaces/user";
 
 const Blog: React.FC = () => {
+  const { user: authUser } = useAuth();
   const { blogId } = useParams<{ blogId: string }>();
   const [blog, setBlog] = useState<BlogData | {}>({});
   const [isUserLiked, setIsUserLiked] = useState<boolean>(false);
   const [totalLikes, setTotalLikes] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [user, setUser] = useState<UserInterface | null>(authUser);
 
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   // Function to format the date
   const formatMongoDate = (createdAt: string): string => {
@@ -60,6 +62,7 @@ const Blog: React.FC = () => {
   }, [blog]);
 
   useEffect(() => {
+    setUser(authUser);
     if (blogId) {
       (async () => {
         await requestHandler(
@@ -99,8 +102,8 @@ const Blog: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="w-full min-h-screen h-full md:py-24 p-5 ">
-      <div className="max-w-screen-md w-full h-full m-auto">
+    <div className="w-full min-h-screen h-auto md:py-24 py-12 px-3">
+      <div className="max-w-screen-md w-full h-auto m-auto">
         <p className="text-sm text-gray-400 mb-2">
           {formatMongoDate((blog as BlogData).createdAt)} |{" "}
           {(blog as BlogData).blogCategory}
@@ -180,7 +183,7 @@ const Blog: React.FC = () => {
               user._id &&
               user._id === (blog as BlogData).author?._id && (
                 <button
-                  className="py-2 px-5 bg-[#2e8f83] text-base text-white rounded hover:bg-[#34a394]"
+                  className="py-2 px-5 bg-red-500 text-base text-white rounded "
                   onClick={deleteHandler}
                 >
                   Delete Blog

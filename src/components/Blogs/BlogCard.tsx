@@ -26,11 +26,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
   };
 
   function getFirst40Words(para: string): string {
-    const words = para.trim().split(/\s+/);
-    if (words.length <= 10) {
+    const words = para.trim().split(" ");
+    if (words.length <= 15) {
       return para;
     }
-    return words.slice(0, 10).join(" ") + "...";
+    return words.slice(0, 15).join(" ") + "...";
   }
 
   const toggleLikeHandler = useCallback(async () => {
@@ -61,7 +61,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
         {formatMongoDate(data.createdAt)} | {data.blogCategory}
       </p>
       <div className="my-2">
-        <h1 className="text-base">{getFirst40Words(data.heading)}</h1>
+        <h1 className="text-base font-bold">{getFirst40Words(data.heading)}</h1>
       </div>
       <div className="my-2">
         <div
