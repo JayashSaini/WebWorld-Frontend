@@ -68,7 +68,7 @@ const AddBlog: React.FC = () => {
       setIsLoading,
       () => {
         resetForm();
-        navigate("/blogs");
+        navigate("/dashboard/blogs");
         toast.success("Blog created successfully!");
       },
       (message: string) => {
@@ -87,7 +87,7 @@ const AddBlog: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-screen p-4">
+    <div className="w-full min-h-screen p-4 ">
       <form
         onSubmit={addBlogHandler}
         className="md:p-6 p-3 rounded-lg shadow-lg max-w-screen-md w-full mx-auto"

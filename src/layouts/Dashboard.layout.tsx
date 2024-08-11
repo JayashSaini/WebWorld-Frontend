@@ -14,7 +14,7 @@ import weblogo from "../assets/weblogo.svg";
 import { useAuth } from "../context/auth.context";
 
 function DashboardLayout() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const links = [
     {
       label: "Courses",
@@ -29,11 +29,6 @@ function DashboardLayout() {
     {
       label: "My Blgos",
       href: "/dashboard/my-blogs",
-      icon: <IconUserBolt className="h-5 w-5 flex-shrink-0" />,
-    },
-    {
-      label: "Profile",
-      href: "/dashboard/profile",
       icon: <IconUserBolt className="h-5 w-5 flex-shrink-0" />,
     },
     {
@@ -70,11 +65,11 @@ function DashboardLayout() {
           <div>
             <SidebarLink
               link={{
-                label: "Hello world",
-                href: "#",
+                label: user?.username || "User",
+                href: "/dashboard/profile",
                 icon: (
                   <img
-                    src="https://assets.aceternity.com/manu.png"
+                    src={user?.avatar?.url}
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}

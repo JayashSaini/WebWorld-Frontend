@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import BlogCard from "./BlogCard";
 import { getAllBlogs, getFavoritesBlog, getMyBlogs } from "../../api";
 import { requestHandler } from "../../util";
-import { MutatingDots, TailSpin } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 import { BlogInterface as Blog, BlogInterface } from "../../interfaces/blog";
 
 interface BlogSectionProps {

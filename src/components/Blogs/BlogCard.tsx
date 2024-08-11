@@ -38,6 +38,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
       async () => await toggleBlogLike(data._id),
       null,
       (response) => {
+        setIsUserLiked(response.data.likeStatus);
         toast.success(response.message);
       },
       (message) => {
@@ -70,7 +71,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
       </div>
       <div className="my-4">
         <Link
-          to={`/blogs/${data._id}`}
+          to={`/dashboard/blogs/${data._id}`}
           className="text-sm text-[#ef6c35] hover:underline flex gap-2 items-center"
           target="_self"
         >

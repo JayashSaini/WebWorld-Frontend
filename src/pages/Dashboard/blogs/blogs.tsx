@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Loader from "../../../components/Loader"; // Assuming Loader component imported
+import Loader from "../../../components/Loader";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -22,13 +22,13 @@ const Blogs: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="w-full max-w-screen-xl min-h-screen md:pt-24 p-5 m-auto">
+    <div className="w-full max-w-screen-xl min-h-screen md:pt-24 py-5 m-auto">
       <div className="w-full flex items-center justify-center">
         <div>
           <h1 className="md:text-4xl text-xl text-white text-center font-semibold">
             Coding Insights and Innovations
           </h1>
-          <p className="text-neutral-300 text-center mt-2 md:text-xl   text-sm">
+          <p className="text-neutral-300 text-center mt-2 md:text-xl text-sm">
             Explore the World of Code: Tutorials, Tips, and Trends in
             Programming
           </p>
@@ -40,8 +40,8 @@ const Blogs: React.FC = () => {
             value={value}
             onChange={handleOnTabChange}
             centered
-            TabIndicatorProps={{ style: { background: "#ef6c35" } }} // Hide the indicator line
-            classes={{ root: "custom-tabs-root" }} // Custom class for Tabs root
+            TabIndicatorProps={{ style: { display: "none" } }} // Hide the indicator line
+            classes={{ root: "custom-tabs-root" }}
             className="md:mb-20 mb-14"
           >
             <Tab
@@ -50,7 +50,7 @@ const Blogs: React.FC = () => {
               sx={{
                 color: value === 0 ? "#ef6c35 !important" : "white !important",
               }}
-              classes={{ root: "custom-tab-root" }} // Custom class for Tab root
+              classes={{ root: "custom-tab-root" }}
             />
             <Tab
               label="Latest"
@@ -58,7 +58,7 @@ const Blogs: React.FC = () => {
               sx={{
                 color: value === 1 ? "#ef6c35 !important" : "white !important",
               }}
-              classes={{ root: "custom-tab-root" }} // Custom class for Tab root
+              classes={{ root: "custom-tab-root" }}
             />
             <Tab
               label="Favorites"
@@ -66,7 +66,7 @@ const Blogs: React.FC = () => {
               sx={{
                 color: value === 2 ? "#ef6c35 !important" : "white !important",
               }}
-              classes={{ root: "custom-tab-root" }} // Custom class for Tab root
+              classes={{ root: "custom-tab-root" }}
             />
           </Tabs>
           <CustomTabPanel value={value} index={0}>

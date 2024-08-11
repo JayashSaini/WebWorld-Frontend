@@ -86,7 +86,7 @@ const Blog: React.FC = () => {
         setIsLoading,
         (data) => {
           toast.success(data.message);
-          navigate("/blogs");
+          navigate("/dashboard/blogs");
         },
         (message) => {
           // Handle error message display (toast.error(message))
@@ -99,7 +99,7 @@ const Blog: React.FC = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="w-full min-h-screen h-full md:pt-24 p-5">
+    <div className="w-full min-h-screen h-full md:py-24 p-5 ">
       <div className="max-w-screen-md w-full h-full m-auto">
         <p className="text-sm text-gray-400 mb-2">
           {formatMongoDate((blog as BlogData).createdAt)} |{" "}
@@ -169,7 +169,7 @@ const Blog: React.FC = () => {
           ></p>
           <div className="my-6 flex items-center justify-between gap-4">
             <Link
-              to="/blogs"
+              to="/dashboard/blogs"
               className="text-sm text-[#ef6c35] hover:underline flex gap-2 items-center"
               target="_self"
             >
