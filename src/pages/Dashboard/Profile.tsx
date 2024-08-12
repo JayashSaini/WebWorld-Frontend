@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { requestHandler } from "../../util";
 import { getProfile, updateAvatar, updateProfile } from "../../api";
 import { toast } from "sonner";
