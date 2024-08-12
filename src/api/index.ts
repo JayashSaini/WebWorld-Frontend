@@ -1,6 +1,8 @@
 // Import necessary modules and utilities
 import axios from "axios";
 import { LocalStorage } from "../util/index.ts";
+import { IFormInput } from "../interfaces/blog.ts";
+import { ProfileInterface } from "../interfaces/index.ts";
 
 // Create an Axios instance for API requests
 const apiClient = axios.create({
@@ -71,15 +73,21 @@ const verifyEmailRequest = (token: string) => {
   return apiClient.get(`/users/verify-email/${token}`);
 };
 
-// blogs api's
+const updateAvatar = (data: any) => {
+  return apiClient.patch(`/users/update-avatar`, data);
+};
 
-const addBlog = (data: {
-  heading: string;
-  subHeading: string;
-  content: string;
-  blogImage: string;
-  blogCategory: string;
-}) => {
+// profile routes
+const updateProfile = (data: ProfileInterface) => {
+  return apiClient.patch(`/profile`, data);
+};
+
+const getProfile = () => {
+  return apiClient.get(`/profile`);
+};
+
+// blogs api's
+const addBlog = (data: IFormInput) => {
   return apiClient.post("/blogs", data);
 };
 
@@ -127,4 +135,7 @@ export {
   toggleBlogLike,
   getMyBlogs,
   deleteBlog,
+  getProfile,
+  updateProfile,
+  updateAvatar,
 };

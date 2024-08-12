@@ -49,12 +49,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
   }, [data._id]);
 
   return (
-    <div className="w-full h-full rounded-xl duration-150 ease-in-out">
-      <div className="w-full overflow-hidden max-h-[250px] h-full">
+    <div className="w-full h-auto rounded-xl duration-150 ease-in-out">
+      <div className="w-full overflow-hidden h-[250px] ">
         <img
           src={data.blogImage.url}
           alt=""
-          className="w-full h-full rounded-md"
+          className="w-full h-full  rounded-md"
         />
       </div>
       <p className="text-sm text-gray-400 mb-2">

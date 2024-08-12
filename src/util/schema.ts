@@ -72,3 +72,56 @@ export const userVerifyOTP = yup
       .matches(/^\d{6}$/, "OTP must be exactly 6 digits long"),
   })
   .required();
+
+export const blogSchema = yup.object().shape({
+  heading: yup.string().required("Heading is required"),
+  subHeading: yup.string().required("Subheading is required"),
+  content: yup.string().required("Content is required"),
+  blogCategory: yup.string().required("Category is required"),
+  blogImage: yup
+    .mixed<File>()
+    .nullable()
+    .test(
+      "fileSize",
+      "File size is too large",
+      (value) => !value || value.size <= 5 * 1024 * 1024 // 5MB max
+    )
+    .test(
+      "fileType",
+      "Unsupported file type",
+      (value) => !value || ["image/jpeg", "image/png"].includes(value.type) // Allowed types
+    ),
+});
+
+export const profileSchema = yup
+  .object()
+  .shape({
+    firstName: yup
+      .string()
+      .nullable() // Allow null values for optional fields
+      .trim()
+      .min(2, "First name must be at least 2 characters long"),
+    lastName: yup
+      .string()
+      .nullable() // Allow null values for optional fields
+      .trim()
+      .min(2, "Last name must be at least 2 characters long"),
+    email: yup
+      .string()
+      .nullable() // Allow null values for optional fields
+      .trim()
+      .email("Please enter a valid email address"),
+    phoneNumber: yup
+      .string()
+      .nullable() // Allow null values for optional fields
+      .matches(/^\d{10}$/, "Phone number must be exactly 10 digits long"),
+  })
+  .test(
+    "at-least-one-field",
+    "At least one field must be updated",
+    function (value) {
+      return Object.values(value).some(
+        (field) => field !== null && field !== ""
+      );
+    }
+  );

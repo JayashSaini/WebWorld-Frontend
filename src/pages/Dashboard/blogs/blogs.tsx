@@ -25,7 +25,7 @@ const Blogs: React.FC = () => {
     <div className="w-full max-w-screen-xl min-h-screen md:pt-24 py-5 m-auto">
       <div className="w-full flex items-center justify-center">
         <div>
-          <h1 className="md:text-4xl text-xl text-white text-center font-semibold">
+          <h1 className="md:text-4xl text-2xl text-white text-center font-semibold mt-4">
             Coding Insights and Innovations
           </h1>
           <p className="text-neutral-300 text-center mt-2 md:text-xl text-sm">

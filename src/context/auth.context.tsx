@@ -34,6 +34,7 @@ const AuthContext = createContext<{
     confirmPassword: string;
   }) => Promise<void>;
   setUserState: (token: string) => Promise<void>;
+  updateAvatar: (user: UserInterface) => void;
 }>({
   user: null,
   email: null,
@@ -45,6 +46,7 @@ const AuthContext = createContext<{
   verifyOTP: async () => {},
   resetPassword: async () => {},
   setUserState: async () => {},
+  updateAvatar: () => {},
 });
 
 // Create a hook to access the AuthContext
@@ -68,7 +70,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading,
       (res) => {
         const { data } = res;
-        setUser(data);
+        setUser(data.user);
         setToken(data.accessToken);
         LocalStorage.set("user", data.user);
         LocalStorage.set("token", data.accessToken);
@@ -185,6 +187,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  const updateAvatar = (user: UserInterface) => {
+    setUser(user);
+    LocalStorage.set("user", JSON.stringify(user));
+  };
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
@@ -213,6 +219,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         verifyOTP,
         resetPassword,
         setUserState,
+        updateAvatar,
       }}
     >
       {isLoading ? <Loader /> : children}

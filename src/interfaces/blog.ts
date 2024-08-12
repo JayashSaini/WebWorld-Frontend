@@ -22,3 +22,12 @@ export interface BlogInterface {
   totalLikes: number;
   isUserLiked: boolean;
 }
+
+// src/types/FormData.ts
+export interface IFormInput {
+  heading: string;
+  subHeading: string;
+  content: string;
+  blogCategory: string;
+  blogImage?: File | null;
+}
