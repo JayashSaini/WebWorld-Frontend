@@ -10,11 +10,13 @@ import PublicRoute from "./PublicRoute";
 // Courses Components
 import Card from "./Courses/Card";
 import CardSection from "./Courses/CardSection";
+import HorizontalCard from "./Courses/HorizontalCard";
 
 export {
   HomeHeader,
   HomeFooter,
   CardCarousal,
+  HorizontalCard,
   Button,
   Input,
   Loader,

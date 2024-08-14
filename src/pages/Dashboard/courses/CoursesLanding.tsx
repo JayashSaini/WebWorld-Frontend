@@ -1,6 +1,8 @@
-import { CardSection } from "../../../components";
+import { CardSection, HorizontalCard } from "../../../components";
 import React from "react";
 import reactImage from "../../../assets/languages-icons/reactposter.png";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const CoursesLanding: React.FC = () => {
   const label = "Our Popular Courses";
@@ -79,9 +81,28 @@ const CoursesLanding: React.FC = () => {
           Welcome, Jayash to Our Courses
         </p>
       </div>
-      {/* Our Courses Section  */}
-      <CardSection label={label} courses={courses} />
-      {/* End Our Courses Section  */}
+      {/* Continue Learning  */}
+      <div className="max-w-screen-2xl m-auto py-8">
+        <div className="w-full px-3 mb-3">
+          <div className="w-full flex justify-between  items-center mb-2">
+            <h2 className="custom-font md:text-2xl text-xl font-medium">
+              Continue Learning
+            </h2>
+            <Link
+              to="/dashboard/courses/all?show=my-enrollments"
+              className="text-sm  flex gap-1 items-center justify-start duration-200 ease-in-out group"
+            >
+              My Enrollments
+              <FaLongArrowAltRight className="ml-1 transform transition-transform duration-200 ease-in-out group-hover:translate-x-2" />
+            </Link>
+          </div>
+          <HorizontalCard />
+        </div>
+        {/* End Continue Learning  */}
+        {/* Our Courses Section  */}
+        <CardSection label={label} courses={courses} />
+        {/* End Our Courses Section  */}
+      </div>
     </div>
   );
 };

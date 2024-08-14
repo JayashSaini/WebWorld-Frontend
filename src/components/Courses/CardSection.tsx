@@ -51,11 +51,11 @@ const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
   return (
     <div className="relative w-full py-8">
       <div className="w-full flex justify-between px-3 items-end">
-        <h2 className="custom-font md:text-3xl text-xl font-medium">{label}</h2>
+        <h2 className="custom-font md:text-2xl text-xl font-medium">{label}</h2>
         <button
-          className="px-4 py-2 border-[1px] border-white rounded-sm cursor-pointer md:text-sm text-xs"
+          className="px-4 py-2 border-[1px] border-white rounded-sm cursor-pointer md:text-sm text-xs hover:bg-[#ef6d3536] duration-200 ease-in-out"
           onClick={() => {
-            navigate("/dashboard/courses/all");
+            navigate("/dashboard/courses/all?show=all-courses");
           }}
         >
           View All

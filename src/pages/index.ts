@@ -14,6 +14,7 @@ import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
 
 // dashboard routes
 import CoursesLanding from "./Dashboard/courses/CoursesLanding";
+import CourseList from "./Dashboard/courses/CourseList";
 
 // blogs routes
 import Blogs from "./Dashboard/blogs/blogs";
@@ -36,6 +37,7 @@ export {
   SocialAuthCallback,
   SocialAuthErrorHandler,
   CoursesLanding,
+  CourseList,
   Blogs,
   AddBlogs,
   MyBlogs,
