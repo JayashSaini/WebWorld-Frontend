@@ -13,7 +13,7 @@ import SocialAuthCallback from "./auth/SocialAuthCallback";
 import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
 
 // dashboard routes
-import Courses from "./Dashboard/Courses";
+import CoursesLanding from "./Dashboard/courses/CoursesLanding";
 
 // blogs routes
 import Blogs from "./Dashboard/blogs/blogs";
@@ -35,7 +35,7 @@ export {
   EmailVerificationHandler,
   SocialAuthCallback,
   SocialAuthErrorHandler,
-  Courses,
+  CoursesLanding,
   Blogs,
   AddBlogs,
   MyBlogs,

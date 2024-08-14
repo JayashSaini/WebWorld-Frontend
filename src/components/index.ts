@@ -7,6 +7,10 @@ import Loader from "./Loader";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
+// Courses Components
+import Card from "./Courses/Card";
+import CardSection from "./Courses/CardSection";
+
 export {
   HomeHeader,
   HomeFooter,
@@ -16,4 +20,6 @@ export {
   Loader,
   PrivateRoute,
   PublicRoute,
+  Card,
+  CardSection,
 };

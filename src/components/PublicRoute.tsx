@@ -8,8 +8,8 @@ const PublicRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Destructure token and user from the authentication context
   const { token, user } = useAuth();
 
-  // If there is a valid token and user ID,
-  if (token && user) return <Navigate to="/" replace />;
+  // If there is a valid token and user ID, navigate the user to the chat page
+  if (token && user?._id) return <Navigate to="/dashboard/courses" replace />;
 
   // If no token or user ID exists, render the child components as they are
   return children;
