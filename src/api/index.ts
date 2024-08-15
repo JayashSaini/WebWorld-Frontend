@@ -120,6 +120,20 @@ const toggleBlogLike = (blogId: string) => {
   return apiClient.post(`/b/likes/${blogId}`);
 };
 
+//  courses endpoints
+
+const getAllCourses = (page = 1, limit = 8) => {
+  return apiClient.get(`/courses?page=${page}&limit=${limit}`);
+};
+
+const getEnrollCourses = () => {
+  return apiClient.get(`/users/enrollment/`);
+};
+
+const getFavoritesCourses = () => {
+  return apiClient.get(`/users/favorites/`);
+};
+
 // Export all the API functions
 export {
   loginUser,
@@ -142,4 +156,7 @@ export {
   getProfile,
   updateProfile,
   updateAvatar,
+  getAllCourses,
+  getEnrollCourses,
+  getFavoritesCourses,
 };

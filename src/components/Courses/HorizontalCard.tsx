@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
-import reactImage from "../../assets/languages-icons/reactposter.png";
-// interface HorizontalCardProps {
-//   data: {
-//     title: string;
-//     thumbnail: string;
-//     lessons: number;
-//   };
-// }
+import { CourseInterface } from "../../interfaces";
 
-const HorizontalCard: React.FC = () => {
-  const data = {
-    title: "Chai aur ReactJS",
-    subTitle:
-      "Chai aur ReactJS is a comprehensive tutorial on ReactJS. It covers everything from the basics to advanced concepts.",
-    thumbnail: reactImage,
-    lessons: 12,
-  };
+interface HorizontalCardProps {
+  data: CourseInterface;
+}
 
+const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 640); // Tailwind's 'sm' breakpoint is 640px
   const subtitle = data.subTitle;
   const maxLength = isSmallScreen ? 70 : 100; // Adjust the length based on screen size
@@ -35,7 +24,7 @@ const HorizontalCard: React.FC = () => {
       <div className="w-full flex px-5 py-6 gap-2 cursor-pointer hover:bg-[#0e1b10ce] duration-100 ease-linear select-none">
         <div className="w-[30%] sm:h-[180px] h-[120px] overflow-hidden ">
           <img
-            src={data.thumbnail}
+            src={data.thumbnail.url}
             alt="thumbnail"
             className="h-full w-full object-cover rounded-md"
           />
@@ -46,9 +35,9 @@ const HorizontalCard: React.FC = () => {
           </h2>
           <p className="text-sm font-light text-gray-300 mt-1">
             Lessons &nbsp;
-            {data.lessons}
+            {data.syllabus.length}
           </p>
-          <h3 className="poppins sm:text-lg text-sm font-normal">
+          <h3 className="poppins sm:text-[17px] text-sm font-normal mt-1">
             {subtitle.slice(0, maxLength)}
             {subtitle.length > maxLength ? "..." : ""}
           </h3>

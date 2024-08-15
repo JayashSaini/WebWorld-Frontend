@@ -1,83 +1,48 @@
-import React from "react";
-import reactImage from "../../../assets/languages-icons/reactposter.png";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { HorizontalCard } from "../../../components";
-
-const courses = [
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-  {
-    title: "ReactJS",
-    thumbnail: reactImage,
-    lessons: 12,
-  },
-];
+import { HorizontalCard, Loader } from "../../../components";
+import {
+  getAllCourses,
+  getEnrollCourses,
+  getFavoritesCourses,
+} from "../../../api";
+import { CourseInterface } from "../../../interfaces";
 
 const CourseList: React.FC = () => {
+  const [loader, setLoader] = React.useState(true);
   const location = useLocation(); // Access the location object
   const queryParams = new URLSearchParams(location.search); // Create an instance of URLSearchParams
   const showParam = queryParams.get("show"); // Get the 'show' query parameter value
+  const [courses, setCourses] = React.useState<CourseInterface[]>([]);
+
+  useEffect(() => {
+    setLoader(true);
+    if (showParam == "my-enrollments") {
+      getEnrollCourses()
+        .then(({ data }) => {
+          setCourses(data.data.enrollCourses);
+        })
+        .catch((err) => console.log(err));
+    } else if (showParam == "favorites") {
+      getFavoritesCourses()
+        .then(({ data }) => {
+          setCourses(data.data.favoriteCourses);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      getAllCourses(1, 100)
+        .then(({ data }) => {
+          setCourses(data.data.courses);
+        })
+        .catch((err) => console.log(err));
+    }
+    setLoader(false);
+  }, []);
 
   const label = convertToHumanReadable(showParam);
-  return (
+  return loader ? (
+    <Loader />
+  ) : (
     <div className="w-full min-h-screen h-auto">
       <div className="w-full sm:px-12 px-3 sm:py-16 py-12 custom-hero-secondary-bg ">
         <h1 className="custom-font sm:text-4xl text-3xl font-medium">
@@ -97,22 +62,24 @@ const CourseList: React.FC = () => {
 
         <div className="my-8 mt-14 md:px-8 px-2">
           <h2 className=" sm:text-3xl text-2xl flex items-center justify-start gap-2">
-            {showParam === "all-courses" ? "Courses" : "All"}{" "}
+            Courses
             <span className="text-white text-xs p-2 bg-slate-800 rounded-full">
               {courses.length < 10 ? "0" + courses.length : courses.length}{" "}
             </span>
           </h2>
-          <div className="w-full min-h-[600px] max-h-[1000px] border-gray-700 border-[1px] rounded-md mt-2  overflow-y-scroll">
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-            <HorizontalCard />
-          </div>
+          {courses.length > 0 ? (
+            <div className="w-full min-h-[600px] max-h-[1000px] border-gray-700 border-[1px] rounded-md mt-2  overflow-y-scroll">
+              {courses.map((course) => (
+                <div key={course._id}>
+                  <HorizontalCard data={course} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="w-full h-[600px] border-gray-700 border-[1px] rounded-md flex justify-center items-center text-white">
+              No Course here.{" "}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -4,18 +4,14 @@ import { cn } from "../../lib/utils";
 import { motion } from "framer-motion";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
+import { CourseInterface } from "../../interfaces";
 
 interface CarouselProps {
   label: string;
-  courses: {
-    title: string;
-    thumbnail: string;
-    lessons: number;
-  }[];
+  courses: CourseInterface[];
 }
 
 const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
-  const carouselCourses = courses.slice(0, 8);
   const navigate = useNavigate();
   const carouselRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
@@ -78,7 +74,7 @@ const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
             "max-w-7xl          " // remove max-w-4xl if you want the carousel to span the full width of its container
           )}
         >
-          {carouselCourses.map((item, index) => (
+          {courses.map((item, index) => (
             <motion.div
               initial={{
                 opacity: 0,

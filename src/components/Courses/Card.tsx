@@ -1,11 +1,8 @@
 import React from "react";
+import { CourseInterface } from "../../interfaces";
 
 interface CardProps {
-  data: {
-    title: string;
-    thumbnail: string;
-    lessons: number;
-  };
+  data: CourseInterface;
 }
 
 const Card: React.FC<CardProps> = ({ data }) => {
@@ -16,7 +13,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     >
       <div className="w-full sm:h-52 h-40 overflow-hidden cursor-pointer rounded-md">
         <img
-          src={data.thumbnail}
+          src={data.thumbnail.url}
           alt="react"
           className="w-full h-full hover:scale-105 duration-200 ease-in-out rounded-md"
         />
@@ -27,7 +24,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </h3>
         <p className="text-sm font-light text-gray-300">
           Lessons &nbsp;
-          {data.lessons}
+          {data.syllabus.length}
         </p>
       </div>
     </div>
