@@ -77,6 +77,9 @@ const updateAvatar = (data: any) => {
   return apiClient.patch(`/users/update-avatar`, data);
 };
 
+const refreshAccessTokenRequest = () => {
+  return apiClient.post(`/users/refresh-token`);
+};
 // profile routes
 const updateProfile = (data: ProfileInterface) => {
   return apiClient.patch(`/profile`, data);
@@ -128,6 +131,7 @@ export {
   resetPasswordRequest,
   resendEmailVerificationRequest,
   verifyEmailRequest,
+  refreshAccessTokenRequest,
   addBlog,
   getAllBlogs,
   getBlogById,

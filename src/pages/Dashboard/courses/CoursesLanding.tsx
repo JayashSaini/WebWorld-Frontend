@@ -93,7 +93,7 @@ const CoursesLanding: React.FC = () => {
               className="text-sm  flex gap-1 items-center justify-start duration-200 ease-in-out group"
             >
               My Enrollments
-              <FaLongArrowAltRight className="ml-1 transform transition-transform duration-200 ease-in-out group-hover:translate-x-2" />
+              <FaLongArrowAltRight className=" transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
             </Link>
           </div>
           <HorizontalCard />

@@ -1,6 +1,7 @@
 // Importing necessary modules and interfaces
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../interfaces/api";
+import { refreshAccessTokenRequest } from "../api";
 
 // A utility function for handling API requests with loading, success, and error handling
 export const requestHandler = async (
@@ -29,9 +30,17 @@ export const requestHandler = async (
       const errorObject = error.response.data.errors[0];
       const [_, value] = Object.entries(errorObject)[0];
       onError(value as string);
-    } else if ([401, 403].includes(error?.response.data?.statusCode)) {
+    } else if (403 == error?.response.data?.statusCode) {
       LocalStorage.clear();
       if (isBrowser) window.location.href = "/auth/login"; // Redirect to login page
+    } else if (401 == error?.response.data?.statusCode) {
+      try {
+        const response = await refreshAccessTokenRequest();
+        LocalStorage.set("token", response.data.accessToken);
+      } catch (error) {
+        LocalStorage.clear();
+        if (isBrowser) window.location.href = "/auth/login";
+      }
     } else {
       onError(error.response?.data?.message || "Something went wrong");
     }
