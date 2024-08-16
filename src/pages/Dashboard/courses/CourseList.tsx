@@ -50,7 +50,7 @@ const CourseList: React.FC = () => {
         </h1>
       </div>
       <div className="p-3 max-w-screen-2xl m-auto">
-        <p className="text-base font-sans custom-font">
+        <p className="text-base font-sans custom-font text-neutral-300">
           <Link
             to="/dashboard/courses"
             className="text-orange-400 hover:underline"
@@ -63,12 +63,12 @@ const CourseList: React.FC = () => {
         <div className="my-8 mt-14 md:px-8 px-2">
           <h2 className=" sm:text-3xl text-2xl flex items-center justify-start gap-2">
             Courses
-            <span className="text-white text-xs p-2 bg-slate-800 rounded-full">
+            <span className="text-white text-xs p-2 bg-neutral-800 rounded-full">
               {courses.length < 10 ? "0" + courses.length : courses.length}{" "}
             </span>
           </h2>
           {courses.length > 0 ? (
-            <div className="w-full min-h-[600px] max-h-[1000px] border-gray-700 border-[1px] rounded-md mt-2  overflow-y-scroll">
+            <div className="w-full min-h-[600px] max-h-[1000px] border-neutral-700 border-[1px] rounded-xl mt-2  overflow-y-scroll">
               {courses.map((course) => (
                 <div key={course._id}>
                   <HorizontalCard data={course} />
@@ -76,7 +76,7 @@ const CourseList: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="w-full h-[600px] border-gray-700 border-[1px] rounded-md flex justify-center items-center text-white">
+            <div className="w-full h-[600px] border-neutral-700 border-[1px] rounded-md flex justify-center items-center text-white">
               No Course here.{" "}
             </div>
           )}

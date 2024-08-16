@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CourseInterface } from "../../interfaces";
+import { useNavigate } from "react-router-dom";
 
 interface HorizontalCardProps {
   data: CourseInterface;
@@ -9,6 +10,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 640); // Tailwind's 'sm' breakpoint is 640px
   const subtitle = data.subTitle;
   const maxLength = isSmallScreen ? 70 : 100; // Adjust the length based on screen size
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,7 +23,12 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
 
   return (
     <>
-      <div className="w-full flex px-5 py-6 gap-2 cursor-pointer hover:bg-[#0e1b10ce] duration-100 ease-linear select-none">
+      <div
+        className="w-full flex px-5 py-6 gap-2 cursor-pointer hover:bg-[#0e1b10ce] duration-100 ease-linear select-none"
+        onClick={() => {
+          navigate("/dashboard/courses/" + data?._id);
+        }}
+      >
         <div className="w-[30%] sm:h-[180px] h-[120px] overflow-hidden ">
           <img
             src={data.thumbnail.url}
@@ -33,7 +40,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
           <h2 className="custom-font sm:text-2xl text-xl  font-light">
             {data.title}
           </h2>
-          <p className="text-sm font-light text-gray-300 mt-1">
+          <p className="text-sm font-light text-neutral-300 mt-1">
             Lessons &nbsp;
             {data.syllabus.length}
           </p>
@@ -43,7 +50,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
           </h3>
         </div>
       </div>
-      <hr className=" border-slate-800" />
+      <hr className=" border-neutral-700" />
     </>
   );
 };

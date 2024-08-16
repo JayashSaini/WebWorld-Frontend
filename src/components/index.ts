@@ -11,6 +11,7 @@ import PublicRoute from "./PublicRoute";
 import Card from "./Courses/Card";
 import CardSection from "./Courses/CardSection";
 import HorizontalCard from "./Courses/HorizontalCard";
+import EnrollmentCard from "./Courses/EnrollmentCard";
 
 export {
   HomeHeader,
@@ -24,4 +25,5 @@ export {
   PublicRoute,
   Card,
   CardSection,
+  EnrollmentCard,
 };

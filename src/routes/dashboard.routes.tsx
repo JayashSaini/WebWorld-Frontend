@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import {
   Blog,
   Blogs,
+  CourseDetails,
   CourseList,
   CoursesLanding,
   MyBlogs,
@@ -18,6 +19,7 @@ const DashboardRoutes: React.FC = () => (
     <Route path="/" element={<DashboardLayout />}>
       <Route index={true} path="/courses" element={<CoursesLanding />} />
       <Route path="/courses/all" element={<CourseList />} />
+      <Route path="/courses/:courseId" element={<CourseDetails />} />
 
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />

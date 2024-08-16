@@ -15,6 +15,7 @@ import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
 // dashboard routes
 import CoursesLanding from "./Dashboard/courses/CoursesLanding";
 import CourseList from "./Dashboard/courses/CourseList";
+import CourseDetails from "./Dashboard/courses/CourseDetails";
 
 // blogs routes
 import Blogs from "./Dashboard/blogs/blogs";
@@ -38,6 +39,7 @@ export {
   SocialAuthErrorHandler,
   CoursesLanding,
   CourseList,
+  CourseDetails,
   Blogs,
   AddBlogs,
   MyBlogs,

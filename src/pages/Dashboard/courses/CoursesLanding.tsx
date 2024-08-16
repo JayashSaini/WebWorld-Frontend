@@ -51,7 +51,7 @@ const CoursesLanding: React.FC = () => {
               </h2>
               <Link
                 to="/dashboard/courses/all?show=my-enrollments"
-                className="text-sm  flex gap-1 items-center justify-start duration-200 ease-in-out group"
+                className="md:text-base text-sm   flex gap-1 items-center justify-start duration-200 ease-in-out group"
               >
                 My Enrollments
                 <FaLongArrowAltRight className=" transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />

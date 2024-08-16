@@ -22,3 +22,7 @@ export interface CourseInterface {
   updatedAt: string; // ISO date string
   __v: number;
 }
+
+export interface CourseDetailInterface extends CourseInterface {
+  lessonTitles: string[];
+}

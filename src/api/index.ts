@@ -134,6 +134,10 @@ const getFavoritesCourses = () => {
   return apiClient.get(`/users/favorites/`);
 };
 
+const getCourseById = (courseId: string) => {
+  return apiClient.get(`/courses/${courseId}`);
+};
+
 // Export all the API functions
 export {
   loginUser,
@@ -159,4 +163,5 @@ export {
   getAllCourses,
   getEnrollCourses,
   getFavoritesCourses,
+  getCourseById,
 };
