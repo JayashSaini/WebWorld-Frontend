@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HoverEffect } from "../components/ui/cardhover";
 import { Project, projects } from "../lib/data.tsx";
 import About from "./About";
 import { CardCarousal, HomeFooter, HomeHeader } from "../components/index.ts";
+import gsap from "gsap";
 
 const Home: React.FC = () => {
   const [displayProjects, setDisplayProjects] = useState<Project[]>([]);
@@ -15,8 +16,16 @@ const Home: React.FC = () => {
       setDisplayProjects(projects);
     }
   };
+  const homeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    gsap.to(homeRef.current, {
+      opacity: 1,
+      ease: "power2.inOut",
+      duration: 0.3,
+      delay: 0.2,
+    });
+
     const mediaQuery: any = window.matchMedia("(max-width: 768px)");
 
     handleViewportChange(mediaQuery);
@@ -29,9 +38,11 @@ const Home: React.FC = () => {
   const sliceProjects = (count: number) => {
     return projects.slice(0, projects.length - count);
   };
-
   return (
-    <div className="max-w-screen-xl w-full md:px-8 px-2 m-auto px-2">
+    <div
+      ref={homeRef}
+      className="opacity-0 max-w-screen-xl w-full md:px-8 px-2 m-auto px-2"
+    >
       {/* Header section */}
       <HomeHeader />
       {/* Hero section */}

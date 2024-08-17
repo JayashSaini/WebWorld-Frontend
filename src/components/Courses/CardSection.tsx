@@ -3,7 +3,7 @@ import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { cn } from "../../lib/utils";
 import { motion } from "framer-motion";
 import Card from "./Card";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CourseInterface } from "../../interfaces";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
@@ -13,7 +13,6 @@ interface CarouselProps {
 }
 
 const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
-  const navigate = useNavigate();
   const carouselRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(true);

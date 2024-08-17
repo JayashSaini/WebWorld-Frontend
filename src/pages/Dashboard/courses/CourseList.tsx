@@ -88,7 +88,9 @@ const CourseList: React.FC = () => {
             </div>
           ) : (
             <div className="w-full h-[600px] border-neutral-700 border-[1px] rounded-md flex justify-center items-center text-white">
-              No Course here.{" "}
+              {showParam == "search-results"
+                ? "No search results found"
+                : "No courses found"}
             </div>
           )}
         </div>
