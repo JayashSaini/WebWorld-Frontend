@@ -1,27 +1,15 @@
+import { Link } from "react-router-dom";
+import logo from "../../assets/weblogo.svg";
+
 const Footer = () => {
   return (
     <footer className="w-full md:mt-36 mt-20">
       <div className="mx-auto w-full  py-6 lg:py-8">
         <div className="md:flex md:justify-between">
-          <div className="mb-16 md:mb-0">
-            <div>
-              <p className="text-lg">Subscribe for Daily Updates!</p>
-              <div className="subscribe-group">
-                <input
-                  type="email"
-                  className="subscribe"
-                  id="Email"
-                  name="Email"
-                  placeholder="Enter your mail"
-                  autoComplete="off"
-                />
-                <input
-                  className="subscribe-button--submit"
-                  value="Subscribe"
-                  type="submit"
-                />
-              </div>
-            </div>
+          <div className="hidden md:block">
+            <Link to="/">
+              <img src={logo} alt="web world" className="w-[150px]" />
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>

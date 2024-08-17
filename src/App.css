@@ -147,49 +147,6 @@
   }
 }
 
-/* Subscribe us css */
-.subscribe-group {
-  display: flex;
-  margin: 10px 0;
-  align-items: center;
-}
-
-.subscribe {
-  min-height: 50px;
-  max-width: 250px;
-  width: 100%;
-  padding: 0 1rem;
-  color: #fff;
-  font-size: 15px;
-  border: 1px solid #ef6c35;
-  border-radius: 6px 0 0 6px;
-  background-color: transparent;
-}
-
-.subscribe-button--submit {
-  min-height: 50px;
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 0 6px 6px 0;
-  background-color: #ef6c35;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.subscribe-button--submit:hover {
-  background-color: #ef6c35;
-}
-
-.subscribe:focus,
-.subscribe:focus-visible {
-  border-color: #ef6c35;
-  outline: none;
-}
-
-/* End Subscribe us  */
-
 /* Search Bar  */
 .group {
   display: flex;
