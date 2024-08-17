@@ -25,8 +25,8 @@ const CoursesLanding: React.FC = () => {
       .then(({ data }) => {
         setEnrollCourses(data.data.enrollCourses);
       })
-      .catch((err) => console.log(err));
-    setLoader(false);
+      .catch((err) => console.log(err))
+      .finally(() => setLoader(false));
   }, []);
 
   return loader ? (

@@ -25,29 +25,32 @@ const CourseList: React.FC = () => {
         .then(({ data }) => {
           setCourses(data.data.enrollCourses);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setLoader(false));
     } else if (showParam == "favorites") {
       getFavoritesCourses()
         .then(({ data }) => {
           setCourses(data.data.favoriteCourses);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setLoader(false));
     } else if (showParam == "search-results") {
       if (query) {
         getCoursesByQuery(query)
           .then(({ data }) => {
             setCourses(data.data.courses);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err))
+          .finally(() => setLoader(false));
       } else toast.error("Please enter a search query");
     } else {
       getAllCourses(1, 100)
         .then(({ data }) => {
           setCourses(data.data.courses);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setLoader(false));
     }
-    setLoader(false);
   }, [query]);
 
   const label = convertToHumanReadable(showParam);

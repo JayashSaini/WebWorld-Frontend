@@ -17,8 +17,8 @@ const CourseDetails = () => {
       .then(({ data }) => setCourse(data.data))
       .catch(() => {
         navigate("/dashboard/courses");
-      });
-    setIsLoading(false);
+      })
+      .finally(() => setIsLoading(false));
   }, []);
   return isLoading ? (
     <Loader />
