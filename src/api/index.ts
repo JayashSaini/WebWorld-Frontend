@@ -138,6 +138,9 @@ const getCourseById = (courseId: string) => {
   return apiClient.get(`/courses/${courseId}`);
 };
 
+const getCoursesByQuery = (query: string) => {
+  return apiClient.get("/courses/query?query=" + query);
+};
 // Export all the API functions
 export {
   loginUser,
@@ -164,4 +167,5 @@ export {
   getEnrollCourses,
   getFavoritesCourses,
   getCourseById,
+  getCoursesByQuery,
 };

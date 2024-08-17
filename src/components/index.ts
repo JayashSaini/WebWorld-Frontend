@@ -12,6 +12,8 @@ import Card from "./Courses/Card";
 import CardSection from "./Courses/CardSection";
 import HorizontalCard from "./Courses/HorizontalCard";
 import EnrollmentCard from "./Courses/EnrollmentCard";
+import CourseHeader from "./Courses/CourseHeader";
+import CourseFooter from "./Courses/CourseFooter";
 
 export {
   HomeHeader,
@@ -26,4 +28,6 @@ export {
   Card,
   CardSection,
   EnrollmentCard,
+  CourseHeader,
+  CourseFooter,
 };

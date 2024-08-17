@@ -3,16 +3,19 @@ import { Link, useLocation } from "react-router-dom";
 import { HorizontalCard, Loader } from "../../../components";
 import {
   getAllCourses,
+  getCoursesByQuery,
   getEnrollCourses,
   getFavoritesCourses,
 } from "../../../api";
 import { CourseInterface } from "../../../interfaces";
+import { toast } from "sonner";
 
 const CourseList: React.FC = () => {
   const [loader, setLoader] = React.useState(true);
   const location = useLocation(); // Access the location object
   const queryParams = new URLSearchParams(location.search); // Create an instance of URLSearchParams
   const showParam = queryParams.get("show"); // Get the 'show' query parameter value
+  const query = queryParams.get("query");
   const [courses, setCourses] = React.useState<CourseInterface[]>([]);
 
   useEffect(() => {
@@ -29,6 +32,14 @@ const CourseList: React.FC = () => {
           setCourses(data.data.favoriteCourses);
         })
         .catch((err) => console.log(err));
+    } else if (showParam == "search-results") {
+      if (query) {
+        getCoursesByQuery(query)
+          .then(({ data }) => {
+            setCourses(data.data.courses);
+          })
+          .catch((err) => console.log(err));
+      } else toast.error("Please enter a search query");
     } else {
       getAllCourses(1, 100)
         .then(({ data }) => {
@@ -37,7 +48,7 @@ const CourseList: React.FC = () => {
         .catch((err) => console.log(err));
     }
     setLoader(false);
-  }, []);
+  }, [query]);
 
   const label = convertToHumanReadable(showParam);
   return loader ? (

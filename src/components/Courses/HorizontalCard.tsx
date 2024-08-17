@@ -9,7 +9,7 @@ interface HorizontalCardProps {
 const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 640); // Tailwind's 'sm' breakpoint is 640px
   const subtitle = data.subTitle;
-  const maxLength = isSmallScreen ? 70 : 100; // Adjust the length based on screen size
+  const maxLength = isSmallScreen ? 50 : 100; // Adjust the length based on screen size
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
             Lessons &nbsp;
             {data.syllabus.length}
           </p>
-          <h3 className="poppins sm:text-[17px] text-sm font-normal mt-1">
+          <h3 className="poppins sm:text-[17px] text-sm font-normal sm:mt-1">
             {subtitle.slice(0, maxLength)}
             {subtitle.length > maxLength ? "..." : ""}
           </h3>

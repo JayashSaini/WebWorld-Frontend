@@ -32,7 +32,7 @@ const CoursesLanding: React.FC = () => {
   return loader ? (
     <Loader />
   ) : (
-    <div className="w-full min-h-screen h-full">
+    <div className="w-full h-auto">
       <div className="w-full sm:px-12 px-3 py-12 custom-hero-bg ">
         <h1 className="custom-font text-xl font-light">Courses</h1>
         <p className="poppins text-2xl font-semibold">

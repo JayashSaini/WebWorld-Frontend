@@ -3,8 +3,9 @@ import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { cn } from "../../lib/utils";
 import { motion } from "framer-motion";
 import Card from "./Card";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CourseInterface } from "../../interfaces";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 interface CarouselProps {
   label: string;
@@ -46,17 +47,17 @@ const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
 
   return (
     <div className="relative w-full py-8">
-      <div className="w-full flex justify-between px-3 items-end">
+      <div className="w-full flex justify-between  items-center mb-2 px-3">
         <h2 className="custom-font md:text-2xl text-xl font-medium">{label}</h2>
-        <button
-          className="px-4 py-2 border-[1px] border-white rounded-sm cursor-pointer md:text-sm text-xs hover:bg-[#ef6d3536] duration-200 ease-in-out"
-          onClick={() => {
-            navigate("/dashboard/courses/all?show=all-courses");
-          }}
+        <Link
+          to="/dashboard/courses/all?show=all-courses"
+          className="md:text-base text-sm   flex gap-1 items-center justify-start duration-200 ease-in-out group"
         >
           View All
-        </button>
+          <FaLongArrowAltRight className=" transform transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+        </Link>
       </div>
+
       <div
         className="flex w-full overflow-x-scroll overscroll-x-auto pt-2 md:pb- pb-5 scroll-smooth [scrollbar-width:none] "
         ref={carouselRef}

@@ -1,25 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import {
-  Blog,
-  Blogs,
-  CourseDetails,
-  CourseList,
-  CoursesLanding,
-  MyBlogs,
-  Profile,
-  Settings,
-} from "../pages";
+import { Blog, Blogs, MyBlogs, Profile, Settings } from "../pages";
 import { PrivateRoute } from "../components";
 import DashboardLayout from "../layouts/Dashboard.layout";
 import AddBlog from "../pages/Dashboard/blogs/addBlog";
+import CourseRoutes from "./course.routes";
 
 const DashboardRoutes: React.FC = () => (
   <Routes>
     <Route path="/" element={<DashboardLayout />}>
-      <Route index={true} path="/courses" element={<CoursesLanding />} />
-      <Route path="/courses/all" element={<CourseList />} />
-      <Route path="/courses/:courseId" element={<CourseDetails />} />
+      <Route index path="/courses/*" element={<CourseRoutes />} />
 
       <Route path="/profile" element={<Profile />} />
       <Route path="/settings" element={<Settings />} />
