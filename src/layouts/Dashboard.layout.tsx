@@ -5,7 +5,6 @@ import {
   IconBookmark,
   IconCertificate,
   IconNotebook,
-  IconSettings,
   IconUserBolt,
 } from "@tabler/icons-react";
 import { Link, Outlet } from "react-router-dom";
