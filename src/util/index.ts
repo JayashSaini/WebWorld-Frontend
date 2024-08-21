@@ -2,6 +2,7 @@
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../interfaces/api";
 import { refreshAccessTokenRequest } from "../api";
+import { formatDistanceToNow } from "date-fns";
 
 // A utility function for handling API requests with loading, success, and error handling
 export const requestHandler = async (
@@ -88,4 +89,21 @@ export class LocalStorage {
     if (!isBrowser) return;
     localStorage.clear();
   }
+}
+
+// Function for formatting the date
+export const formatMongoDate = (createdAt: string): string => {
+  const date = new Date(createdAt);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+  return `${formattedDate}`;
+};
+
+export function formatRelativeTime(mongoDate: string) {
+  const date = new Date(mongoDate); // Convert MongoDB date string to JavaScript Date object
+  return formatDistanceToNow(date, { addSuffix: true }); // Format the date relative to now
 }

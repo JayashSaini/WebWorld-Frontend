@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/slidebar";
 import {
   IconArrowLeft,
+  IconBookmark,
   IconCertificate,
   IconNotebook,
   IconSettings,
@@ -41,9 +42,9 @@ function DashboardLayout() {
       icon: <IconUserBolt className="h-5 w-5 flex-shrink-0" />,
     },
     {
-      label: "Settings",
-      href: "/dashboard/settings",
-      icon: <IconSettings className="h-5 w-5 flex-shrink-0" />,
+      label: "Bookmark",
+      href: "/dashboard/courses/all?show=favorites",
+      icon: <IconBookmark className="h-5 w-5 flex-shrink-0" />,
     },
     {
       label: "Logout",

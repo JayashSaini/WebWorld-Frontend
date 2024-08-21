@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CourseDetailInterface } from "../../interfaces";
 import { VscAdd, VscCheck } from "react-icons/vsc";
 import Button from "../Button";
+import { useAuth } from "../../context/auth.context";
+import { useNavigate } from "react-router-dom";
 interface CardProps {
   data: CourseDetailInterface | null;
 }
 
 const EnrollmentCard: React.FC<CardProps> = ({ data }) => {
+  const { user, addCourseToEnrollment } = useAuth();
+  const [isEnroll, setIsEnroll] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      isEnrollHandler();
+    }
+  }, [user, data?._id]);
+
+  const isEnrollHandler = () => {
+    const isEnroll = user?.enrollments.find((id) => id === data?._id);
+    setIsEnroll(isEnroll == undefined ? false : true);
+  };
   return (
     <div
       className="w-full custom-secondary-bg  inline-block  px-4 py-6 rounded-md cursor-pointer group 
@@ -23,7 +39,18 @@ const EnrollmentCard: React.FC<CardProps> = ({ data }) => {
         <p className="flex gap-1 items-center justify-start text-sm mb-1">
           <VscAdd className="text-base" /> 365 Days Validity
         </p>
-        <Button>Enroll For Free</Button>
+        <Button
+          onClick={async () => {
+            if (!isEnroll) {
+              addCourseToEnrollment(data?._id || "");
+            }
+            navigate(
+              `/dashboard/courses/learn/${data?._id}/lesson/${data?.lessonTitles[0]._id}`
+            );
+          }}
+        >
+          {isEnroll ? "Go to Lessons" : "Enroll For Free"}
+        </Button>
         <hr className="border-gray-700 my-6" />
         <h3 className="text-base font-medium mb-3  custom-font">
           What's Included &nbsp;

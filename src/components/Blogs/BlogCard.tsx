@@ -5,6 +5,7 @@ import { toggleBlogLike } from "../../api";
 import { toast } from "sonner";
 import { requestHandler } from "../../util";
 import { BlogInterface } from "../../interfaces/blog";
+import { formatMongoDate } from "../../util";
 interface BlogCardProps {
   data: BlogInterface;
 }
@@ -12,18 +13,6 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ data }) => {
   const [isUserLiked, setIsUserLiked] = useState<boolean>(data.isUserLiked);
   const [totalLikes, setTotalLikes] = useState<number>(data.totalLikes);
-
-  // Function for formatting the date
-  const formatMongoDate = (createdAt: string): string => {
-    const date = new Date(createdAt);
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    const formattedDate = date.toLocaleDateString("en-US", options);
-    return `${formattedDate}`;
-  };
 
   function getFirst40Words(para: string): string {
     const words = para.trim().split(" ");

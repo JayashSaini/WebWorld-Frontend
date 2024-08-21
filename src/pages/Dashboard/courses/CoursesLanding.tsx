@@ -1,38 +1,48 @@
+import React, { useEffect, useState } from "react";
 import { CardSection, HorizontalCard, Loader } from "../../../components";
-import React, { useEffect } from "react";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { getAllCourses, getEnrollCourses } from "../../../api";
 import { CourseInterface } from "../../../interfaces";
 import { useAuth } from "../../../context/auth.context";
+import { requestHandler } from "../../../util"; // Make sure to import requestHandler
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 const CoursesLanding: React.FC = () => {
   const { user } = useAuth();
-  const [loader, setLoader] = React.useState(true);
-  const [courses, setCourses] = React.useState<CourseInterface[]>([]);
-  const [enrollCourses, setEnrollCourses] = React.useState<CourseInterface[]>(
-    []
-  );
+  const [loader, setLoader] = useState(true);
+  const [courses, setCourses] = useState<CourseInterface[]>([]);
+  const [enrollCourses, setEnrollCourses] = useState<CourseInterface[]>([]);
 
   useEffect(() => {
-    setLoader(true);
-    getAllCourses(1, 8)
-      .then(({ data }) => {
-        setCourses(data.data.courses);
-      })
-      .catch((err) => console.log(err));
-    getEnrollCourses()
-      .then(({ data }) => {
-        setEnrollCourses(data.data.enrollCourses);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => setLoader(false));
+    // Fetch all courses
+    requestHandler(
+      async () => await getAllCourses(1, 8),
+      setLoader,
+      ({ data }) => {
+        setCourses(data.courses);
+      },
+      (errorMessage) => {
+        console.log("Error fetching all courses:", errorMessage);
+      }
+    );
+
+    // Fetch enrolled courses
+    requestHandler(
+      async () => await getEnrollCourses(),
+      setLoader,
+      ({ data }) => {
+        setEnrollCourses(data.enrollCourses);
+      },
+      (errorMessage) => {
+        console.log("Error fetching enrolled courses:", errorMessage);
+      }
+    );
   }, []);
 
   return loader ? (
     <Loader />
   ) : (
-    <div className="w-full h-auto">
+    <div className="w-full h-auto min-h-screen">
       <div className="w-full sm:px-12 px-3 py-12 custom-hero-bg ">
         <h1 className="custom-font text-xl font-light">Courses</h1>
         <p className="poppins text-2xl font-semibold">
@@ -42,7 +52,7 @@ const CoursesLanding: React.FC = () => {
         </p>
       </div>
       {/* Continue Learning  */}
-      <div className="max-w-screen-2xl m-auto py-8">
+      <div className=" m-auto py-8">
         {enrollCourses.length > 0 && (
           <div className="w-full px-3 mb-3">
             <div className="w-full flex justify-between  items-center mb-2">

@@ -7,14 +7,14 @@ import { useAuth } from "../../context/auth.context";
 const SocialAuthCallback = () => {
   const { accessToken, refreshToken } = useParams();
   const navigate = useNavigate();
-  const { setUserState } = useAuth();
+  const { SetUserStateByToken } = useAuth();
 
   useEffect(() => {
     if (!(accessToken && refreshToken)) {
       toast.error("Google Sign in Failed please try again.");
       navigate("/auth/login");
     } else {
-      setUserState(accessToken);
+      SetUserStateByToken(accessToken);
     }
   });
 

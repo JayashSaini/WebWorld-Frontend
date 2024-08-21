@@ -4,6 +4,8 @@ import { CourseDetailInterface } from "../../../interfaces";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { EnrollmentCard, Loader } from "../../../components";
 import { IoVideocamOutline } from "react-icons/io5";
+import { requestHandler } from "../../../util";
+
 const CourseDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { courseId } = useParams();
@@ -12,14 +14,16 @@ const CourseDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLoading(true);
-    getCourseById(courseId || "")
-      .then(({ data }) => setCourse(data.data))
-      .catch(() => {
+    requestHandler(
+      async () => await getCourseById(courseId || ""),
+      setIsLoading,
+      ({ data }) => setCourse(data),
+      () => {
         navigate("/dashboard/courses");
-      })
-      .finally(() => setIsLoading(false));
+      }
+    );
   }, []);
+
   return isLoading ? (
     <Loader />
   ) : (
@@ -40,7 +44,7 @@ const CourseDetails = () => {
             <h2 className="sm:text-4xl text-2xl custom-font font-medium sm:mt-10 mt-5">
               {course?.title}
             </h2>
-            <h2 className="text-lg mt-1 text-neutral-200">
+            <h2 className="sm:text-lg text-sm mt-1 text-neutral-200">
               {course?.subTitle}
             </h2>
           </div>
@@ -54,23 +58,24 @@ const CourseDetails = () => {
               Syllabus
             </h2>
             <div className="w-full sm:min-h-[600px] min-h-[300px] border-neutral-700 border-[1px] neutral rounded-xl mt-2 scroll-smooth overflow-hidden">
-              {course?.lessonTitles.map((title, idx) => (
-                <div
+              {course?.lessonTitles.map((lesson, idx) => (
+                <Link
                   key={idx}
                   className={`px-3 py-6 cursor-pointer flex gap-2 items-top justify-start border-[1px] border-neutral-800 duration-200 ease-linear ${
                     idx === 0 ? "bg-neutral-700" : "hover:bg-neutral-700"
                   }`}
+                  to={`/dashboard/courses/learn/${course?._id}/lesson/${lesson._id}`}
                 >
                   <IoVideocamOutline className="sm:text-xl text-lg text-neutral-200 font-bold" />
                   <div>
                     <h3 className="sm:text-base poppins text-sm text-white ">
-                      {title}
+                      {lesson.title}
                     </h3>
                     <p className="sm:text-sm text-xs text-neutral-300 custom-font">
                       Video
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <h2 className="sm:text-2xl text-xl custom-font font-medium mt-5">

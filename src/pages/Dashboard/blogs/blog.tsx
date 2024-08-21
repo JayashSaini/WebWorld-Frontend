@@ -3,7 +3,7 @@ import { FaHeart, FaRegHeart, FaLongArrowAltLeft } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { deleteBlog, getBlogById, toggleBlogLike } from "../../../api";
 import { toast } from "sonner";
-import { requestHandler } from "../../../util";
+import { requestHandler, formatMongoDate } from "../../../util";
 import { useAuth } from "../../../context/auth.context";
 import Loader from "../../../components/Loader";
 import { BlogInterface as BlogData } from "../../../interfaces/blog";
@@ -19,18 +19,6 @@ const Blog: React.FC = () => {
   const [user, setUser] = useState<UserInterface | null>(authUser);
 
   const navigate = useNavigate();
-
-  // Function to format the date
-  const formatMongoDate = (createdAt: string): string => {
-    const date = new Date(createdAt);
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    const formattedDate = date.toLocaleDateString("en-US", options);
-    return `${formattedDate}`;
-  };
 
   // Function to add paragraph spacing
   const addParagraphSpacing = (content: string, wordLimit: number): string => {

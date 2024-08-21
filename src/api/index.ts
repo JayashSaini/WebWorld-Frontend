@@ -12,6 +12,7 @@ const apiClient = axios.create({
 });
 
 // Add an interceptor to set authorization header with user token before requests
+// Add a request interceptor to set the authorization header with user token
 apiClient.interceptors.request.use(
   function (config) {
     // Retrieve user token from local storage
@@ -141,6 +142,42 @@ const getCourseById = (courseId: string) => {
 const getCoursesByQuery = (query: string) => {
   return apiClient.get("/courses/query?query=" + query);
 };
+
+const getSyllabusesByCourseId = (courseId: string) => {
+  return apiClient.get(`/c/syllabus/${courseId}`);
+};
+
+const getSyllabusById = (courseId: string, syllabusId: string) => {
+  return apiClient.get(`c/syllabus/${courseId}/${syllabusId} `);
+};
+
+const toggleCourseToFavorites = (courseId: string) => {
+  return apiClient.post("/users/favorites/" + courseId);
+};
+
+const addCourseToEnrollmentRequest = (courseId: string) => {
+  return apiClient.post("/users/enrollment/" + courseId);
+};
+
+const toggleCourseLikeHandler = (courseId: string) => {
+  return apiClient.post("/c/likes/" + courseId);
+};
+
+const getLessonComments = (lessonId: string) => {
+  return apiClient.get("/c/comments/" + lessonId);
+};
+const addLessonComment = (lessonId: string, comment: string) => {
+  return apiClient.post(`/c/comments/${lessonId}`, { comment: comment });
+};
+
+const deleteLessonComment = (commentId: string) => {
+  return apiClient.delete("/c/comments/" + commentId);
+};
+
+const updateLessonComment = (commentId: string, comment: string) => {
+  return apiClient.patch("/c/comments/" + commentId, { comment });
+};
+
 // Export all the API functions
 export {
   loginUser,
@@ -168,4 +205,13 @@ export {
   getFavoritesCourses,
   getCourseById,
   getCoursesByQuery,
+  getSyllabusesByCourseId,
+  getSyllabusById,
+  toggleCourseToFavorites,
+  addCourseToEnrollmentRequest,
+  toggleCourseLikeHandler,
+  getLessonComments,
+  addLessonComment,
+  deleteLessonComment,
+  updateLessonComment,
 };

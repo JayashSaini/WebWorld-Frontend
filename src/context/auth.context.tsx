@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  addCourseToEnrollmentRequest,
   forgotPasswordRequest,
   loginUser,
   logoutUser,
   registerUser,
   resetPasswordRequest,
   selfUser,
+  toggleCourseToFavorites,
   verifyOTPRequest,
 } from "../api";
 import { Loader } from "../components";
@@ -33,8 +35,11 @@ const AuthContext = createContext<{
     newPassword: string;
     confirmPassword: string;
   }) => Promise<void>;
-  setUserState: (token: string) => Promise<void>;
+  SetUserStateByToken: (token: string) => Promise<void>;
   updateAvatar: (user: UserInterface) => void;
+  toggleCourseFavorites: (courseId: string) => void;
+  addCourseToEnrollment: (courseId: string) => void;
+  setUserState: (user: string, token: string) => void;
 }>({
   user: null,
   email: null,
@@ -45,8 +50,11 @@ const AuthContext = createContext<{
   forgotPassword: async () => {},
   verifyOTP: async () => {},
   resetPassword: async () => {},
-  setUserState: async () => {},
+  SetUserStateByToken: async () => {},
   updateAvatar: () => {},
+  toggleCourseFavorites: () => {},
+  addCourseToEnrollment: () => {},
+  setUserState: () => {},
 });
 
 // Create a hook to access the AuthContext
@@ -169,16 +177,13 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
-  const setUserState = async (token: string) => {
+  const SetUserStateByToken = async (token: string) => {
     await requestHandler(
       async () => selfUser(),
       setIsLoading,
       (res) => {
         const { data } = res;
-        setUser(data);
-        setToken(token);
-        LocalStorage.set("user", data);
-        LocalStorage.set("token", token);
+        setUserState(data, token);
         navigate("/dashboard/courses");
       },
       (message) => {
@@ -187,10 +192,68 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  const setUserState = async (user: string, token: string) => {
+    LocalStorage.set("user", user);
+    LocalStorage.set("token", token);
+    setUser(JSON.parse(user));
+    setToken(token);
+  };
+
   const updateAvatar = (user: UserInterface) => {
     setUser(user);
     LocalStorage.set("user", JSON.stringify(user));
   };
+
+  const toggleCourseFavorites = async (courseId: string) => {
+    // Check if the course is already in favorites
+    const isFavorite = user?.favorites.includes(courseId);
+
+    // Update state based on whether the course is already a favorite
+    setUser((prev: any) => {
+      const updatedFavorites = isFavorite
+        ? prev.favorites.filter((id: string) => id !== courseId) // Remove from favorites
+        : [...prev.favorites, courseId]; // Add to favorites
+      const updatedUser = {
+        ...prev,
+        favorites: updatedFavorites,
+      };
+      return updatedUser;
+    });
+
+    await requestHandler(
+      async () => await toggleCourseToFavorites(courseId || ""),
+      null,
+      () => {},
+      (err) => {
+        // Handle error in requestHandler
+        toast.error(err);
+      }
+    );
+  };
+
+  async function addCourseToEnrollment(courseId: string) {
+    // Update state based on whether the course is already a favorite
+    await requestHandler(
+      async () => await addCourseToEnrollmentRequest(courseId || ""),
+      setIsLoading,
+      () => {
+        return setUser((prev: any) => {
+          const updatedEnrollments = [...prev.enrollments, courseId];
+          const updatedUser = {
+            ...prev,
+            enrollments: updatedEnrollments,
+          };
+          LocalStorage.set("user", updatedUser);
+          return updatedUser;
+        });
+      },
+      (err) => {
+        // Handle error in requestHandler
+        return toast.error(err);
+      }
+    );
+  }
+
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
     setIsLoading(true);
@@ -230,8 +293,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         forgotPassword,
         verifyOTP,
         resetPassword,
+        SetUserStateByToken,
         setUserState,
         updateAvatar,
+        toggleCourseFavorites,
+        addCourseToEnrollment,
       }}
     >
       {isLoading ? <Loader /> : children}

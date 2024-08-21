@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HorizontalCard, Loader } from "../../../components";
 import {
@@ -9,49 +9,49 @@ import {
 } from "../../../api";
 import { CourseInterface } from "../../../interfaces";
 import { toast } from "sonner";
+import { requestHandler } from "../../../util";
 
 const CourseList: React.FC = () => {
-  const [loader, setLoader] = React.useState(true);
-  const location = useLocation(); // Access the location object
-  const queryParams = new URLSearchParams(location.search); // Create an instance of URLSearchParams
-  const showParam = queryParams.get("show"); // Get the 'show' query parameter value
+  const [loader, setLoader] = useState(true);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const showParam = queryParams.get("show");
   const query = queryParams.get("query");
-  const [courses, setCourses] = React.useState<CourseInterface[]>([]);
+  const [courses, setCourses] = useState<CourseInterface[]>([]);
 
   useEffect(() => {
-    setLoader(true);
-    if (showParam == "my-enrollments") {
-      getEnrollCourses()
-        .then(({ data }) => {
-          setCourses(data.data.enrollCourses);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoader(false));
-    } else if (showParam == "favorites") {
-      getFavoritesCourses()
-        .then(({ data }) => {
-          setCourses(data.data.favoriteCourses);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoader(false));
-    } else if (showParam == "search-results") {
-      if (query) {
-        getCoursesByQuery(query)
-          .then(({ data }) => {
-            setCourses(data.data.courses);
-          })
-          .catch((err) => console.log(err))
-          .finally(() => setLoader(false));
-      } else toast.error("Please enter a search query");
-    } else {
-      getAllCourses(1, 100)
-        .then(({ data }) => {
-          setCourses(data.data.courses);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setLoader(false));
-    }
-  }, [query]);
+    const fetchCourses = async () => {
+      if (showParam === "my-enrollments") {
+        return await getEnrollCourses();
+      } else if (showParam === "favorites") {
+        return await getFavoritesCourses();
+      } else if (showParam === "search-results" && query) {
+        return await getCoursesByQuery(query);
+      } else {
+        return await getAllCourses(1, 100);
+      }
+    };
+
+    requestHandler(
+      fetchCourses,
+      setLoader,
+      ({ data }) => {
+        if (showParam === "my-enrollments") {
+          setCourses(data.enrollCourses);
+        } else if (showParam === "favorites") {
+          setCourses(data.favoriteCourses);
+        } else if (showParam === "search-results") {
+          setCourses(data.courses);
+        } else {
+          setCourses(data.courses);
+        }
+      },
+      (errorMessage) => {
+        toast.error(errorMessage || "Something went wrong");
+        setCourses([]);
+      }
+    );
+  }, [query, showParam]);
 
   const label = convertToHumanReadable(showParam);
   return loader ? (

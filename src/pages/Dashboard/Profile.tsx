@@ -158,21 +158,12 @@ const Profile = () => {
           />
         </div>
         <div className="w-full pt-3">
-          <Button fullWidth disabled={submitLoading}>
-            {submitLoading ? (
-              <TailSpin
-                visible={true}
-                height="27"
-                width="27"
-                color="#fff"
-                ariaLabel="tail-spin-loading"
-                radius="1"
-                wrapperStyle={{}}
-                wrapperClass=""
-              />
-            ) : (
-              "Update Profile"
-            )}
+          <Button
+            fullWidth={true}
+            disabled={submitLoading}
+            isLoading={submitLoading}
+          >
+            Update Profile{" "}
           </Button>
         </div>
       </form>
@@ -188,11 +179,19 @@ const Profile = () => {
               color={[0, 0, 0, 0.6]} // RGBA
               scale={1.2}
             />
-            <div className="flex justify-between mt-4 gap-2 md:flex-row flex-col">
-              <Button onClick={() => setShowEditor(false)} severity="secondary">
+            <div className=" mt-4 flex flex-col gap-2">
+              <Button
+                onClick={() => setShowEditor(false)}
+                severity="secondary"
+                fullWidth={true}
+              >
                 Cancel
               </Button>
-              <Button onClick={handleSaveAvatar} disabled={avatarLoading}>
+              <Button
+                onClick={handleSaveAvatar}
+                disabled={avatarLoading}
+                fullWidth={true}
+              >
                 {avatarLoading ? (
                   <TailSpin
                     visible={true}
