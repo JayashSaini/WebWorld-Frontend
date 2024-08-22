@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { CourseLessonInterface } from "../../interfaces";
 import { requestHandler } from "../../util";
@@ -13,6 +13,11 @@ const AboutCourse: React.FC<AboutCourseProps> = ({ lesson, about }) => {
   const [totalLikes, setTotalLikes] = useState<number | undefined>(
     lesson?.totalLikes || 0
   );
+
+  useEffect(() => {
+    setIsUserLiked(lesson?.isUserLiked);
+    setTotalLikes(lesson?.totalLikes);
+  }, [lesson]);
 
   const handleLikeToggle = async () => {
     if (isUserLiked) {
