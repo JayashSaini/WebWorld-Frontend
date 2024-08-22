@@ -3,9 +3,9 @@ import nextjsImage from "../assets/languages-icons/nextjs.jpg";
 import htmlImage from "../assets/languages-icons/html.jpg";
 import gitImage from "../assets/languages-icons/git.jpg";
 import nodeImage from "../assets/languages-icons/nodejs.jpg";
-import mySQLImage from "../assets/languages-icons/mysql.jpg";
+import mySQLImage from "../assets/languages-icons/mysql.png";
 
-import mysqlImagePoster from "../assets/languages-icons/mysqlposter.png";
+import mysqlImagePoster from "../assets/languages-icons/mysqlposter.jpg";
 import reactImagePoster from "../assets/languages-icons/reactposter.png";
 import nextImagePoster from "../assets/languages-icons/nextjsposter.png";
 import gitImagePoster from "../assets/languages-icons/gitposter.png";

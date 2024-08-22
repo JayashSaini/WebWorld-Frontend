@@ -21,7 +21,7 @@ const Button: React.FC<
         {...props}
         className={` 
           ${fullWidth ? "w-full" : "sm:min-w-[220px] "}
-          px-6 sm:py-3 py-2  rounded-md  flex items-center justify-center border-[#ef6c35] ${
+          px-6 py-3 rounded-md  flex items-center justify-center border-[#ef6c35] ${
             severity == "primary" ? "bg-[#ef6c35]" : "bg-transparent"
           } border-[1px]   duration-200 ease-in font-semibold flex items-center justify-center disabled:bg-[#353535] disabled:border-[#d6d6d64f] disabled:text-gray-500
           ${size === "small" ? "sm:text-sm text-xs" : "sm:text-base text-sm"}

@@ -10,7 +10,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="sm:w-[320px] w-[270px] bg-[#2222228f] sm:h-[350px] h-[290px] inline-block border-[1px] border-neutral-700 px-4 py-7 rounded-md cursor-pointer select-none "
+      className="sm:w-[320px] w-[270px] bg-[#2222228f] sm:h-[330px] h-[290px] inline-block border-[1px] border-neutral-700 px-4 py-7 rounded-md cursor-pointer select-none "
       onClick={() => {
         navigate("/dashboard/courses/" + data?._id);
       }}
@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         />
       </div>
       <div className="mt-2">
-        <h3 className="custom-font2 sm:text-lg text-base  w-[90%] font-semibold">
+        <h3 className="custom-font2  text-base  w-[90%] font-semibold">
           {data.title.slice(0, 55)}
           {data.title.length > 55 ? "..." : ""}
         </h3>

@@ -31,7 +31,7 @@ export const requestHandler = async (
       const errorObject = error.response.data.errors[0];
       const [_, value] = Object.entries(errorObject)[0];
       onError(value as string);
-    } else if (error?.response.data?.statusCode in [403, 401]) {
+    } else if (401 == error?.response.status || error?.response.status == 403) {
       LocalStorage.clear();
       if (isBrowser) window.location.href = "/auth/login"; // Redirect to login page
     } else {

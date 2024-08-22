@@ -22,7 +22,7 @@ const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
       carouselRef.current.scrollLeft = 0;
       checkScrollability();
     }
-  }, []);
+  }, [courses]);
 
   const checkScrollability = () => {
     if (carouselRef.current) {
