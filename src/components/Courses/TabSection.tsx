@@ -74,11 +74,7 @@ const CourseTabSection: React.FC<CourseTabSectionProps> = ({
         </Tabs>
       </Box>
       <CourseTabPanel value={activeTabIndex} index={0}>
-        <AboutCourse
-          about={about}
-          lessonId={lesson?._id}
-          courseId={lesson?.courseId}
-        />
+        <AboutCourse about={about} lesson={lesson} />
       </CourseTabPanel>
       <CourseTabPanel value={activeTabIndex} index={1}>
         <CommentCourse isEnroll={isEnroll} lesson={lesson} />
