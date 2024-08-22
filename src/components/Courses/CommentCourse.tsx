@@ -185,13 +185,13 @@ const CommentCourse: React.FC<CommentCourseInterface> = ({
   ) : (
     <div>
       {!isEnroll && (
-        <h2 className="sm:text-2xl text-base font-se custom-font">
+        <h2 className="sm:text-2xl text-base font-bold custom-font">
           Lesson Discussion
         </h2>
       )}
       {isEnroll && !showUpdateCommentSection && (
         <>
-          <h2 className="sm:text-2xl text-base font-se custom-font">
+          <h2 className="sm:text-2xl text-base  custom-font">
             Lesson Discussion
           </h2>
 
@@ -222,7 +222,7 @@ const CommentCourse: React.FC<CommentCourseInterface> = ({
 
       {isEnroll && showUpdateCommentSection && (
         <div ref={editCommentRef}>
-          <h2 className="sm:text-2xl text-base font-se custom-font">
+          <h2 className="sm:text-2xl text-base font-bold custom-font">
             Edit Your Comment
           </h2>
 

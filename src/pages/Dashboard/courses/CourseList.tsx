@@ -59,9 +59,7 @@ const CourseList: React.FC = () => {
   ) : (
     <div className="w-full min-h-screen h-auto">
       <div className="w-full sm:px-12 px-3 sm:py-16 py-12 custom-hero-secondary-bg ">
-        <h1 className="custom-font sm:text-4xl text-3xl font-medium">
-          {label}
-        </h1>
+        <h1 className="custom-font2 sm:text-4xl text-3xl font-bold">{label}</h1>
       </div>
       <div className="p-3 max-w-screen-2xl m-auto">
         <p className="text-base font-sans custom-font text-neutral-300">

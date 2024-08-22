@@ -119,7 +119,7 @@ const Lesson = () => {
                   </Link>{" "}
                   / Course / {course?.title.slice(0, 15)}...
                 </p>
-                <h2 className="sm:text-4xl text-sm custom-font font-medium">
+                <h2 className="sm:text-4xl text-sm custom-font2 font-bold">
                   {lesson?.title}
                 </h2>
                 <p className="poppins sm:text-base text-xs  font-medium mb-2">

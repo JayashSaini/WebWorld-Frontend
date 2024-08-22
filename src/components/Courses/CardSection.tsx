@@ -47,7 +47,7 @@ const CardSection: React.FC<CarouselProps> = ({ label, courses }) => {
   return (
     <div className="relative w-full py-8">
       <div className="w-full flex justify-between  items-center mb-2 px-3">
-        <h2 className="custom-font md:text-2xl text-xl font-medium">{label}</h2>
+        <h2 className="custom-font md:text-2xl text-xl font-bold">{label}</h2>
         <Link
           to="/dashboard/courses/all?show=all-courses"
           className="md:text-base text-sm   flex gap-1 items-center justify-start duration-200 ease-in-out group"

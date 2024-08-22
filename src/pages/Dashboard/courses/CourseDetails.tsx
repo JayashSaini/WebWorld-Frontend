@@ -41,7 +41,7 @@ const CourseDetails = () => {
               </Link>{" "}
               / Course / {course?.title.slice(0, 15)}...
             </p>
-            <h2 className="sm:text-4xl text-2xl custom-font font-medium sm:mt-10 mt-5">
+            <h2 className="sm:text-4xl text-2xl custom-font2 font-bold sm:mt-10 mt-5">
               {course?.title}
             </h2>
             <h2 className="sm:text-lg text-sm mt-1 text-neutral-200">
@@ -57,7 +57,7 @@ const CourseDetails = () => {
             <h2 className="sm:text-xl text-lg  poppins font-medium sm:mt-10 mt-5">
               Syllabus
             </h2>
-            <div className="w-full sm:min-h-[600px] min-h-[300px] border-neutral-700 border-[1px] neutral rounded-xl mt-2 scroll-smooth overflow-hidden">
+            <div className="w-full sm:h-[500px] h-[300px] border-neutral-700 border-[1px] neutral rounded-xl mt-2 scroll-smooth overflow-y-scroll">
               {course?.lessonTitles.map((lesson, idx) => (
                 <Link
                   key={idx}

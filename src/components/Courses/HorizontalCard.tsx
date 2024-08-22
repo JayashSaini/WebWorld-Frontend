@@ -37,7 +37,7 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ data }) => {
           />
         </div>
         <div className="w-[70%] text-white">
-          <h2 className="custom-font sm:text-2xl text-xl  font-light">
+          <h2 className="custom-font2 sm:text-2xl text-xl  font-bold">
             {data.title}
           </h2>
           <p className="text-sm font-light text-neutral-300 mt-1">

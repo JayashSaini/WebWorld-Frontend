@@ -183,7 +183,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading,
       (res) => {
         const { data } = res;
-        setUserState(data, token);
+        LocalStorage.set("user", data.user);
+        LocalStorage.set("token", token);
+        setUser(data.user);
+        setToken(token);
         navigate("/dashboard/courses");
       },
       (message) => {

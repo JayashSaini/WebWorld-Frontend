@@ -41,7 +41,7 @@ const Home: React.FC = () => {
   return (
     <div
       ref={homeRef}
-      className="opacity-0 max-w-screen-xl w-full md:px-8 px-2 m-auto px-2"
+      className="opacity-0 max-w-screen-xl w-full md:px-8 px-2 m-auto "
     >
       {/* Header section */}
       <HomeHeader />

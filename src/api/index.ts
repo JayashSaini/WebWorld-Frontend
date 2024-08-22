@@ -78,7 +78,10 @@ const updateAvatar = (data: any) => {
   return apiClient.patch(`/users/update-avatar`, data);
 };
 
-const refreshAccessTokenRequest = () => {
+const refreshAccessTokenRequest = (refreshToken?: string) => {
+  if (refreshToken) {
+    return apiClient.post(`/users/refresh-token`, { refreshToken });
+  }
   return apiClient.post(`/users/refresh-token`);
 };
 // profile routes
