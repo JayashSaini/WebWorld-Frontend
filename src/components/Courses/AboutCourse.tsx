@@ -20,13 +20,13 @@ const AboutCourse: React.FC<AboutCourseProps> = ({ lesson, about }) => {
     } else {
       setTotalLikes((prevLikes) => (prevLikes ? prevLikes + 1 : 1));
     }
+    setIsUserLiked((prev) => !prev);
     await requestHandler(
       async () => await toggleCourseLikeHandler(lesson?._id || ""),
       null,
       () => {},
       () => {}
     );
-    setIsUserLiked(!isUserLiked);
   };
 
   return (
