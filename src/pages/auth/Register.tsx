@@ -6,6 +6,7 @@ import { useAuth } from "../../context/auth.context.tsx";
 import { userRegisterSchema } from "../../util/schema.ts";
 import { Link } from "react-router-dom";
 import google from "../../assets/google.svg";
+import { useState } from "react";
 
 // Defining form input interface
 interface IFormInput {
@@ -18,6 +19,7 @@ interface IFormInput {
 const Register: React.FC = () => {
   // Accessing the login function from the AuthContext
   const { register: authRegister } = useAuth();
+  const [isSSOLoader, setIsSSOLoader] = useState(false);
 
   // Setting up React Hook Form
   const {
@@ -34,6 +36,7 @@ const Register: React.FC = () => {
   };
 
   const onGoogleSignIn = async () => {
+    setIsSSOLoader(true);
     window.location.href = `${
       import.meta.env.VITE_BACKEND_URI
     }/api/v1/users/google`;
@@ -94,7 +97,11 @@ const Register: React.FC = () => {
           </Link>
         </small>
       </form>
-      <Button severity="secondary" onClick={onGoogleSignIn}>
+      <Button
+        severity="secondary"
+        onClick={onGoogleSignIn}
+        isLoading={isSSOLoader}
+      >
         <img src={google} alt="" className="w-[38px]" />
         <span className="text-white">Sign in with Google</span>
       </Button>
