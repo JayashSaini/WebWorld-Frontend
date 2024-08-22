@@ -1,7 +1,6 @@
 // Importing necessary modules and interfaces
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../interfaces/api";
-import { refreshAccessTokenRequest } from "../api";
 import { formatDistanceToNow } from "date-fns";
 import { jwtDecode } from "jwt-decode";
 
