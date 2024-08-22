@@ -7,22 +7,35 @@ import {
   IconNotebook,
   IconUserBolt,
 } from "@tabler/icons-react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { cn } from "../lib/utils";
 import weblogoicon from "../assets/weblogoicon.png";
 import weblogo from "../assets/weblogo.svg";
 import { useAuth } from "../context/auth.context";
 import { UserInterface } from "../interfaces/user";
+import { checkTokenExpiry, LocalStorage } from "../util";
 
 function DashboardLayout() {
   const { logout, user: authUser } = useAuth();
   const [user, setUser] = useState<UserInterface | null>(null);
+  const token: string | null = LocalStorage.get("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (authUser) {
       setUser(authUser);
     }
   }, [authUser]);
+
+  useEffect(() => {
+    if (token) {
+      const isTokenExpired = checkTokenExpiry(token);
+
+      if (isTokenExpired) {
+        navigate("/refresh-token/" + token);
+      }
+    }
+  }, [token]);
 
   const links = [
     {

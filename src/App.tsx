@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import AuthRoutesWrapper from "./routes/auth.routes";
 import DashboardRoutesWrapper from "./routes/dashboard.routes";
-import { Home } from "./pages";
+import { Home, RefreshToken } from "./pages";
 import SiteRoutesWrapper from "./routes/site.routes";
 
 function App() {
@@ -22,6 +22,8 @@ function App() {
 
         {/* Dashboard routes */}
         <Route path="/dashboard/*" element={<DashboardRoutesWrapper />} />
+
+        <Route path="/refresh-token/:token" element={<RefreshToken />} />
 
         {/* 404 page */}
         <Route

@@ -256,7 +256,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Check for saved user and token in local storage during component initialization
   useEffect(() => {
-    setIsLoading(true);
     const _user: UserInterface | null = LocalStorage.get(
       "user"
     ) as UserInterface | null;
@@ -264,20 +263,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     if (_token && _user?._id) {
       setUser(_user);
       setToken(_token);
-    } else {
-      selfUser()
-        .then((res) => {
-          const { data } = res;
-          setUser(data.data.user);
-          setToken(data.data.accessToken);
-          LocalStorage.set("user", data.data.user);
-          LocalStorage.set("token", data.data.accessToken);
-        })
-        .catch(() => {
-          navigate("/");
-        });
     }
-    setIsLoading(false);
   }, []);
 
   // Provide authentication-related data and functions through the context

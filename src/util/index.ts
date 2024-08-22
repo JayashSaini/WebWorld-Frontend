@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import { ApiResponse } from "../interfaces/api";
 import { refreshAccessTokenRequest } from "../api";
 import { formatDistanceToNow } from "date-fns";
+import { jwtDecode } from "jwt-decode";
 
 // A utility function for handling API requests with loading, success, and error handling
 export const requestHandler = async (
@@ -31,17 +32,9 @@ export const requestHandler = async (
       const errorObject = error.response.data.errors[0];
       const [_, value] = Object.entries(errorObject)[0];
       onError(value as string);
-    } else if (403 == error?.response.data?.statusCode) {
+    } else if (error?.response.data?.statusCode in [403, 401]) {
       LocalStorage.clear();
       if (isBrowser) window.location.href = "/auth/login"; // Redirect to login page
-    } else if (401 == error?.response.data?.statusCode) {
-      try {
-        const response = await refreshAccessTokenRequest();
-        LocalStorage.set("token", response.data.accessToken);
-      } catch (error) {
-        LocalStorage.clear();
-        if (isBrowser) window.location.href = "/auth/login";
-      }
     } else {
       onError(error.response?.data?.message || "Something went wrong");
     }
@@ -107,3 +100,19 @@ export function formatRelativeTime(mongoDate: string) {
   const date = new Date(mongoDate); // Convert MongoDB date string to JavaScript Date object
   return formatDistanceToNow(date, { addSuffix: true }); // Format the date relative to now
 }
+
+export const checkTokenExpiry = (token: string | null) => {
+  if (!token) return true; // Consider expired if token is missing
+
+  try {
+    // Ensure the token is decoded and its expiration time is extracted
+    const decodedToken: { exp: number } = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+
+    // Return true if the token has expired
+    return decodedToken.exp < currentTime;
+  } catch (error) {
+    // If there's an error decoding the token, assume it's expired
+    return true;
+  }
+};

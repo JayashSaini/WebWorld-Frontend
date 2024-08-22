@@ -11,6 +11,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/auth/refresh-token/:token",
+      "destination": "/index.html"
+    },
+    {
       "source": "/auth/google/error",
       "destination": "/index.html"
     },

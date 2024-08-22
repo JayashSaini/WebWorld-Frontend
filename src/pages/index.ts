@@ -11,6 +11,7 @@ import ResetPassword from "./auth/ResetPassword";
 import VerifyOTP from "./auth/VerifyOTP";
 import SocialAuthCallback from "./auth/SocialAuthCallback";
 import SocialAuthErrorHandler from "./auth/SocialAuthErrorHandler";
+import RefreshToken from "./auth/RefreshToken";
 
 // dashboard routes
 import CoursesLanding from "./Dashboard/courses/CoursesLanding";
@@ -38,6 +39,7 @@ export {
   EmailVerificationHandler,
   SocialAuthCallback,
   SocialAuthErrorHandler,
+  RefreshToken,
   CoursesLanding,
   CourseList,
   CourseDetails,
