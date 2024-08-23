@@ -220,6 +220,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         ...prev,
         favorites: updatedFavorites,
       };
+      LocalStorage.set("user", updatedUser);
       return updatedUser;
     });
 

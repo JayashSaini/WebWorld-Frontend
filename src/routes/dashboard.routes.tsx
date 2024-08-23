@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Blog, Blogs, MyBlogs, Profile, Settings } from "../pages";
+import { Blog, Blogs, MyBlogs, Profile } from "../pages";
 import { PrivateRoute } from "../components";
 import DashboardLayout from "../layouts/Dashboard.layout";
 import AddBlog from "../pages/Dashboard/blogs/addBlog";
@@ -12,7 +12,6 @@ const DashboardRoutes: React.FC = () => (
       <Route index path="/courses/*" element={<CourseRoutes />} />
 
       <Route path="/profile" element={<Profile />} />
-      <Route path="/settings" element={<Settings />} />
 
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/create-blog" element={<AddBlog />} />

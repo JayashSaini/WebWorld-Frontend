@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CommentInterface, CourseLessonInterface } from "../../interfaces";
+import { CommentInterface } from "../../interfaces";
 import Button from "../Button";
 import { formatRelativeTime, requestHandler } from "../../util";
 import {
@@ -14,16 +14,10 @@ import { FaLongArrowAltDown, FaLongArrowAltUp } from "react-icons/fa";
 import { IoMdMore } from "react-icons/io";
 import DropDown from "../DropDown";
 import { TailSpin } from "react-loader-spinner";
+import { useCourse } from "../../context/course.context";
 
-interface CommentCourseInterface {
-  isEnroll?: boolean;
-  lesson?: CourseLessonInterface;
-}
-
-const CommentCourse: React.FC<CommentCourseInterface> = ({
-  isEnroll,
-  lesson,
-}) => {
+const CommentCourse: React.FC = () => {
+  const { lesson, isEnrolled } = useCourse();
   const [isAddButtonLoading, setIsAddButtonLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -184,12 +178,12 @@ const CommentCourse: React.FC<CommentCourseInterface> = ({
     </div>
   ) : (
     <div>
-      {!isEnroll && (
+      {!isEnrolled && (
         <h2 className="sm:text-2xl text-base font-bold custom-font">
           Lesson Discussion
         </h2>
       )}
-      {isEnroll && !showUpdateCommentSection && (
+      {isEnrolled && !showUpdateCommentSection && (
         <>
           <h2 className="sm:text-2xl text-base  custom-font">
             Lesson Discussion
@@ -220,7 +214,7 @@ const CommentCourse: React.FC<CommentCourseInterface> = ({
         </>
       )}
 
-      {isEnroll && showUpdateCommentSection && (
+      {isEnrolled && showUpdateCommentSection && (
         <div ref={editCommentRef}>
           <h2 className="sm:text-2xl text-base font-bold custom-font">
             Edit Your Comment

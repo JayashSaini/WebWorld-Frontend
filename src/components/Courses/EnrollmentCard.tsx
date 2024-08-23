@@ -4,25 +4,16 @@ import { VscAdd, VscCheck } from "react-icons/vsc";
 import Button from "../Button";
 import { useAuth } from "../../context/auth.context";
 import { useNavigate } from "react-router-dom";
+import { useCourse } from "../../context/course.context";
 interface CardProps {
   data: CourseDetailInterface | null;
 }
 
 const EnrollmentCard: React.FC<CardProps> = ({ data }) => {
-  const { user, addCourseToEnrollment } = useAuth();
-  const [isEnroll, setIsEnroll] = useState<boolean>(false);
+  const { addCourseToEnrollment } = useAuth();
+  const { isEnrolled } = useCourse();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      isEnrollHandler();
-    }
-  }, [user, data?._id]);
-
-  const isEnrollHandler = () => {
-    const isEnroll = user?.enrollments.find((id) => id === data?._id);
-    setIsEnroll(isEnroll == undefined ? false : true);
-  };
   return (
     <div
       className="w-full custom-secondary-bg  inline-block  px-4 py-6 rounded-md cursor-pointer group 
@@ -41,7 +32,7 @@ const EnrollmentCard: React.FC<CardProps> = ({ data }) => {
         </p>
         <Button
           onClick={async () => {
-            if (!isEnroll) {
+            if (!isEnrolled) {
               addCourseToEnrollment(data?._id || "");
             }
             navigate(
@@ -49,7 +40,7 @@ const EnrollmentCard: React.FC<CardProps> = ({ data }) => {
             );
           }}
         >
-          {isEnroll ? "Go to Lessons" : "Enroll For Free"}
+          {isEnrolled ? "Go to Lessons" : "Enroll For Free"}
         </Button>
         <hr className="border-gray-700 my-6" />
         <h3 className="text-base font-medium mb-3  custom-font">

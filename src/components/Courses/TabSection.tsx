@@ -2,7 +2,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { CourseLessonInterface } from "../../interfaces";
 
 import AboutCourse from "./AboutCourse";
 import CommentCourse from "./CommentCourse";
@@ -13,17 +12,7 @@ interface TabPanelProps {
   value: number;
 }
 
-interface CourseTabSectionProps {
-  lesson?: CourseLessonInterface;
-  about?: string;
-  isEnroll: boolean;
-}
-
-const CourseTabSection: React.FC<CourseTabSectionProps> = ({
-  lesson,
-  about,
-  isEnroll,
-}) => {
+const CourseTabSection: React.FC = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const handleTabChange = (_: any, newIndex: number) => {
@@ -74,10 +63,10 @@ const CourseTabSection: React.FC<CourseTabSectionProps> = ({
         </Tabs>
       </Box>
       <CourseTabPanel value={activeTabIndex} index={0}>
-        <AboutCourse about={about} lesson={lesson} />
+        <AboutCourse />
       </CourseTabPanel>
       <CourseTabPanel value={activeTabIndex} index={1}>
-        <CommentCourse isEnroll={isEnroll} lesson={lesson} />
+        <CommentCourse />
       </CourseTabPanel>
     </Box>
   );

@@ -21,9 +21,7 @@ const CoursesLanding: React.FC = () => {
       ({ data }) => {
         setCourses(data.courses);
       },
-      (errorMessage) => {
-        console.log("Error fetching all courses:", errorMessage);
-      }
+      () => (window.location.host = "/auth/login")
     );
 
     // Fetch enrolled courses
@@ -33,9 +31,7 @@ const CoursesLanding: React.FC = () => {
       ({ data }) => {
         setEnrollCourses(data.enrollCourses);
       },
-      (errorMessage) => {
-        console.log("Error fetching enrolled courses:", errorMessage);
-      }
+      () => (window.location.host = "/auth/login")
     );
   }, []);
 

@@ -5,12 +5,15 @@ import { BrowserRouter } from "react-router-dom";
 import { AnimationProvider } from "./context/animation.context.tsx";
 import { AuthProvider } from "./context/auth.context.tsx";
 import { Toaster } from "sonner";
+import { CourseProvider } from "./context/course.context.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <AuthProvider>
       <AnimationProvider>
-        <App />
+        <CourseProvider>
+          <App />
+        </CourseProvider>
       </AnimationProvider>
     </AuthProvider>
     <Toaster position="bottom-right" duration={2000} />

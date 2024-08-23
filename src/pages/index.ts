@@ -25,7 +25,6 @@ import AddBlogs from "./Dashboard/blogs/addBlog";
 import MyBlogs from "./Dashboard/blogs/myBlogs";
 import Blog from "./Dashboard/blogs/blog";
 import Profile from "./Dashboard/Profile";
-import Settings from "./Dashboard/Settings";
 
 export {
   Home,
@@ -49,5 +48,4 @@ export {
   MyBlogs,
   Blog,
   Profile,
-  Settings,
 };

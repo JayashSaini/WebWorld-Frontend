@@ -1,38 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
-import { CourseLessonInterface } from "../../interfaces";
-import { requestHandler } from "../../util";
-import { toggleCourseLikeHandler } from "../../api";
+import { useCourse } from "../../context/course.context";
 
-interface AboutCourseProps {
-  lesson?: CourseLessonInterface;
-  about?: string;
-}
-const AboutCourse: React.FC<AboutCourseProps> = ({ lesson, about }) => {
-  const [isUserLiked, setIsUserLiked] = useState(lesson?.isUserLiked);
-  const [totalLikes, setTotalLikes] = useState<number | undefined>(
-    lesson?.totalLikes || 0
-  );
-
-  useEffect(() => {
-    setIsUserLiked(lesson?.isUserLiked);
-    setTotalLikes(lesson?.totalLikes);
-  }, [lesson]);
-
-  const handleLikeToggle = async () => {
-    if (isUserLiked) {
-      setTotalLikes((prevLikes) => (prevLikes ? prevLikes - 1 : 0));
-    } else {
-      setTotalLikes((prevLikes) => (prevLikes ? prevLikes + 1 : 1));
-    }
-    setIsUserLiked((prev) => !prev);
-    await requestHandler(
-      async () => await toggleCourseLikeHandler(lesson?._id || ""),
-      null,
-      () => {},
-      () => {}
-    );
-  };
+const AboutCourse: React.FC = () => {
+  const { lesson, course, ToggleLikedHandler, isUserLiked, totalLikes } =
+    useCourse();
 
   return (
     <>
@@ -46,7 +18,12 @@ const AboutCourse: React.FC<AboutCourseProps> = ({ lesson, about }) => {
           className="flex gap-4 items-center  poppins"
           htmlFor="like-checkbox"
         >
-          <div onClick={handleLikeToggle} className="cursor-pointer text-xl">
+          <div
+            onClick={() => {
+              ToggleLikedHandler(lesson?._id || "");
+            }}
+            className="cursor-pointer text-xl"
+          >
             {isUserLiked ? <AiFillLike /> : <AiOutlineLike />}
           </div>
           <span className="text-neutral-300 text-lg">{totalLikes}</span>
@@ -55,7 +32,7 @@ const AboutCourse: React.FC<AboutCourseProps> = ({ lesson, about }) => {
       <h3 className="sm:text-xl text-base font-medium custom-font mt-3">
         About This Course
       </h3>
-      <p className="text-sm font-light mt-1 ">{about}</p>
+      <p className="text-sm font-light mt-1 ">{course?.about}</p>
     </>
   );
 };

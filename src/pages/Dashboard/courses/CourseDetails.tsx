@@ -1,28 +1,21 @@
 import { useEffect, useState } from "react";
-import { getCourseById } from "../../../api";
-import { CourseDetailInterface } from "../../../interfaces";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { EnrollmentCard, Loader } from "../../../components";
 import { IoVideocamOutline } from "react-icons/io5";
-import { requestHandler } from "../../../util";
+import { useCourse } from "../../../context/course.context";
 
 const CourseDetails = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const { courseId } = useParams();
-  const [course, setCourse] = useState<CourseDetailInterface | null>(null);
-
-  const navigate = useNavigate();
+  const { course, setCourseHandler } = useCourse();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    requestHandler(
-      async () => await getCourseById(courseId || ""),
-      setIsLoading,
-      ({ data }) => setCourse(data),
-      () => {
-        navigate("/dashboard/courses");
-      }
-    );
-  }, []);
+    if (courseId) {
+      setCourseHandler(courseId).finally(() => {
+        setIsLoading(false);
+      });
+    }
+  }, [courseId]);
 
   return isLoading ? (
     <Loader />

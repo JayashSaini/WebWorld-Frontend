@@ -1,72 +1,41 @@
 import { useEffect, useState } from "react";
-import {
-  CourseDetailInterface,
-  CourseLessonInterface,
-} from "../../../interfaces";
-import { requestHandler } from "../../../util";
-import { getCourseById, getSyllabusById } from "../../../api";
 import { Link, useParams } from "react-router-dom";
-import { toast } from "sonner";
 import { Button, Loader, TabSection } from "../../../components";
 import { IoVideocamOutline } from "react-icons/io5";
 import { IoArrowBack, IoBookmarkOutline, IoBookmark } from "react-icons/io5";
 import { useAuth } from "../../../context/auth.context";
+import { useCourse } from "../../../context/course.context";
 
 const Lesson = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [lesson, setLesson] = useState<CourseLessonInterface>();
-  const [course, setCourse] = useState<CourseDetailInterface>();
-
+  const [isLoading, setIsLoading] = useState(true);
   const { courseId, lessonId } = useParams();
+  const {
+    course,
+    setLessonHandler,
+    setCourseHandler,
+    lesson,
+    isEnrolled,
+    isFavorite,
+  } = useCourse();
+  const { toggleCourseFavorites, addCourseToEnrollment } = useAuth();
 
-  const { user, toggleCourseFavorites, addCourseToEnrollment } = useAuth();
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
-  const [isEnroll, setIsEnroll] = useState<boolean>(false);
+  useEffect(() => {
+    if (courseId) {
+      setIsLoading(true);
+      setCourseHandler(courseId).finally(() => {
+        setIsLoading(false);
+      });
+    }
+    if (courseId && lessonId) {
+      setIsLoading(true);
+      setLessonHandler(courseId, lessonId).finally(() => {
+        setIsLoading(false);
+      });
+    }
+  }, [courseId, lessonId]);
 
   const ellipsis =
     course?.title?.length && course.title.length > 30 ? "..." : "";
-
-  useEffect(() => {
-    requestHandler(
-      async () => await getSyllabusById(courseId || "", lessonId || ""),
-      setIsLoading,
-      ({ data }) => {
-        setLesson(data);
-      },
-      (err) => {
-        toast.error(err);
-        window.location.href = "/";
-      }
-    );
-    requestHandler(
-      async () => await getCourseById(courseId || ""),
-      setIsLoading,
-      ({ data }) => {
-        setCourse(data);
-      },
-      (err) => {
-        toast.error(err);
-        window.location.href = "/";
-      }
-    );
-  }, [courseId, lessonId]);
-
-  useEffect(() => {
-    if (user) {
-      isFavoriteHandler();
-      isEnrollHandler();
-    }
-  }, [user, courseId]);
-
-  const isFavoriteHandler = () => {
-    const isFavorite = user?.favorites.find((id) => id === courseId);
-    setIsFavorite(isFavorite == undefined ? false : true);
-  };
-
-  const isEnrollHandler = () => {
-    const isEnroll = user?.enrollments.find((id) => id === courseId);
-    setIsEnroll(isEnroll == undefined ? false : true);
-  };
 
   return isLoading ? (
     <Loader />
@@ -95,7 +64,7 @@ const Lesson = () => {
           </div>
         </div>
         <div className="w-full relative" style={{ paddingTop: "56.25%" }}>
-          {isEnroll ? (
+          {isEnrolled ? (
             <div className="w-full absolute top-0 left-0 h-full">
               <iframe
                 src={lesson?.video?.url}
@@ -139,13 +108,13 @@ const Lesson = () => {
           )}
         </div>
         {/* Tab Section  */}
-        <TabSection lesson={lesson} about={course?.about} isEnroll={isEnroll} />
+        <TabSection />
       </div>
       <div className="w-[30%] lg:block hidden h-screen border-l-[1px] border-l-neutral-800 absolute top-0 right-0">
         <h2 className="sm:text-xl text-lg poppins font-medium px-1 my-2 ">
           Syllabus
         </h2>
-        <div className="w-full h-full mt-2 overflow-y-auto scroll-smooth">
+        <div className="w-full h-[95%] mt-2 overflow-y-auto scroll-smooth">
           {course?.lessonTitles.map((lesson, idx) => (
             <Link
               key={idx}
