@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CourseDetailInterface } from "../../interfaces";
 import { VscAdd, VscCheck } from "react-icons/vsc";
 import Button from "../Button";
